@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 15:04:38 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:37:54 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 int	main(int ac, char *av[])
 {
+	t_philo_p params;
+	t_phil **philos;
+
+	if (!check_args(&params, ac, av))
+		return (1);
+	//launch philos
+	//freeall
 	printf(" hello world\n");
-	(void)ac;
-	(void)av;
+	// les args doivent etre passes sous forme d unisgned int sauf pour time to eat et sleep en miliseconde (double ?)
+	// les philo sont nommes et ranges de 1 a nb of philo et assis dans leurs ordre croissant 
+	// tu dois representer des philosophers a l'aide de thread (pthread_create), utiliser usleep pour les faire attendre que un autre thread finisse une tache
+	// entre chaque philo tu as une fork (une a gauche une a droite donc suposant table ronde (sauf si un seul philo, un seul fork !!))
+	//empecher les philo de duppliquer les fork avec mutex
 	return (0);
 }
 /*Program name philo
