@@ -39,7 +39,7 @@ BONUS_DIR = bonus
 #                                Source Files                                  #
 # **************************************************************************** #
 
-SRC = $(addprefix $(SRC_DIR)/, main.c  )
+SRC = $(addprefix $(SRC_DIR)/, main.c check_args.c )
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 # **************************************************************************** #
