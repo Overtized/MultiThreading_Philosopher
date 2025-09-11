@@ -96,9 +96,9 @@ bonus: $(BONUS_OBJ) $(SHARED_OBJ)
 # **************************************************************************** #
 clean: 
 	rm -rf $(Objects) obj
-	make clean -C Libft
-	rm -rf $(LIBFT_DIR)/libft.a
-	make clean -C minilibx-linux
+# 	make clean -C Libft
+# 	rm -rf $(LIBFT_DIR)/libft.a
+# 	make clean -C minilibx-linux
 
 fclean: clean
 	rm -rf $(NAME) $(NAME)_bonus
