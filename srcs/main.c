@@ -6,47 +6,38 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 15:33:46 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:43:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-void	*routine(void *params)
-{
-	t_thread *mutex;
-	int i;
-	int mails;
-	int *result;
 
-	mutex = (t_thread *) params;
-	i = 0;
-	mails = 0;
-	result = malloc(sizeof(int) * 1);
-	if (!result)
-		return (false);
-	while (i < 10)
-	{
-		pthread_mutex_lock(&mutex->mutex);
-		mails += 1;
-		i++;
-		pthread_mutex_unlock(&mutex->mutex);
-	}
-	*result = mails;
-	return ((void *) result);
-}
 int	main(int ac, char *av[])
 {
 	t_philo_p params;
-	t_phil **philos;
-	int	*res;
+	t_phil *philos;
+	// int	i;
+	// int	*res;
 	
-	// if (!check_args(&params, ac, av))
-	// 	return (1);
-	res = pthread_init();
-	if (res == NULL)
+	// i = 0;
+	if (!check_args(&params, ac, av))
 		return (1);
-	printf(" sum of mails %d\n", *res);
-	free(res);
+	// printf("%d\n", params.nb_philo);
+	philos = init_philos(params, &philos);
+	if (philos == NULL)
+		return (printf("Struct init failed\n"), 1);
+	printf("%d\n", params.nb_philo);
+	// while (i < params.nb_philo)
+	// {
+	// 	printf("philo name is %d\n", philos[i].phil_name);
+	// 	i++;
+	// }
+	
+	// res = pthread_init();
+	// if (res == NULL)
+	// 	return (1);
+	// printf(" sum of mails %d\n", *res);
+	// free(res);
 	//launch philos
 	//freeall
 	// printf(" hello world\n");

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 15:33:24 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:30:44 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,22 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <limits.h>
 
 typedef struct s_philo_p
 {
 	int	nb_philo;
-	int	nb_fork;
-	float	d_timer;
-	float	e_timer;
+	int	d_timer;
+	int	e_timer;
+	int	s_timer;
 	int	meal_nb;
 }	t_philo_p;
 typedef struct s_phil
 {
 	int	phil_name;
-	int	nb_fork;
-	float	d_timer;
-	float	e_timer;
+	int	d_timer;
+	int	e_timer;
+	int	s_timer;
 	int	meal_nb;
 }	t_phil;
 typedef struct s_thread
@@ -46,5 +47,12 @@ typedef struct s_thread
 bool	check_args(t_philo_p *params, int ac, char *av[]);
 void	*routine(void *params);
 int	*pthread_init(void);
+bool	test_int(char *av[]);
+bool	is_not_int(char *str);
+bool	is_overflow(const char *str);
+bool	fill_struct(t_philo_p *params, char *av[]);
+void	copy_struct(t_philo_p params, t_phil *philos);
+int	mini_atoi(const char *str);
+t_phil *init_philos(t_philo_p params, t_phil **philos);
 
 #endif
