@@ -6,19 +6,19 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 14:06:22 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:33:46 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-void	*routine()
+void	*routine(void *params)
 {
-	pthread_mutex_t mutex;
+	t_thread *mutex;
 	int i;
 	int mails;
 	int *result;
 
-	pthread_mutex_init(&mutex, NULL);
+	mutex = (t_thread *) params;
 	i = 0;
 	mails = 0;
 	result = malloc(sizeof(int) * 1);
@@ -26,14 +26,13 @@ void	*routine()
 		return (false);
 	while (i < 10)
 	{
-		pthread_mutex_lock(&mutex);
+		pthread_mutex_lock(&mutex->mutex);
 		mails += 1;
 		i++;
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(&mutex->mutex);
 	}
 	*result = mails;
 	return ((void *) result);
-	pthread_mutex_destroy(&mutex);
 }
 int	main(int ac, char *av[])
 {
@@ -47,6 +46,7 @@ int	main(int ac, char *av[])
 	if (res == NULL)
 		return (1);
 	printf(" sum of mails %d\n", *res);
+	free(res);
 	//launch philos
 	//freeall
 	// printf(" hello world\n");

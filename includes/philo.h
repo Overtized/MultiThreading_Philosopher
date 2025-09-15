@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 13:05:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:33:24 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,14 @@ typedef struct s_phil
 	float	e_timer;
 	int	meal_nb;
 }	t_phil;
+typedef struct s_thread
+{
+	pthread_t t[3];
+	pthread_mutex_t mutex;
+}	t_thread;
 
 bool	check_args(t_philo_p *params, int ac, char *av[]);
-void	*routine();
+void	*routine(void *params);
 int	*pthread_init(void);
 
 #endif
