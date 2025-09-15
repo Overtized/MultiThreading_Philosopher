@@ -3,26 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/11 15:40:14 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/15 14:06:22 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+void	*routine()
+{
+	pthread_mutex_t mutex;
+	int i;
+	int mails;
+	int *result;
 
+	pthread_mutex_init(&mutex, NULL);
+	i = 0;
+	mails = 0;
+	result = malloc(sizeof(int) * 1);
+	if (!result)
+		return (false);
+	while (i < 10)
+	{
+		pthread_mutex_lock(&mutex);
+		mails += 1;
+		i++;
+		pthread_mutex_unlock(&mutex);
+	}
+	*result = mails;
+	return ((void *) result);
+	pthread_mutex_destroy(&mutex);
+}
 int	main(int ac, char *av[])
 {
 	t_philo_p params;
 	t_phil **philos;
-
-	if (!check_args(&params, ac, av))
+	int	*res;
+	
+	// if (!check_args(&params, ac, av))
+	// 	return (1);
+	res = pthread_init();
+	if (res == NULL)
 		return (1);
+	printf(" sum of mails %d\n", *res);
 	//launch philos
 	//freeall
-	printf(" hello world\n");
+	// printf(" hello world\n");
 	(void) philos;
+	(void) ac;
+	(void) av;
+	(void) params;
 	// les args doivent etre passes sous forme d unisgned int sauf pour time to eat et sleep en miliseconde (double ?)
 	// les philo sont nommes et ranges de 1 a nb of philo et assis dans leurs ordre croissant 
 	// tu dois representer des philosophers a l'aide de thread (pthread_create), utiliser usleep pour les faire attendre que un autre thread finisse une tache

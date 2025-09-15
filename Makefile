@@ -21,7 +21,7 @@ NAME = philo
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -O0 
+FLAGS = -pthread -Wall -Wextra -Werror -g3 -O0 
 INCLUDES = -I./includes 
 INCLUDES_BONUS = -I./bonus
 
