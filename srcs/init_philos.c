@@ -6,13 +6,13 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/16 10:10:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:36:17 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/philo.h"
+#include "../includes/philo.h"
 
-t_phil *init_philos(t_philo_p params)
+t_phil	*init_philos(t_philo_p params)
 {
 	int		i;
 	t_phil	*philos;

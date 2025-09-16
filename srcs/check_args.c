@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 18:39:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:36:01 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	test_int(char *av[])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (av[i])
@@ -29,6 +29,7 @@ bool	test_int(char *av[])
 		return (printf ("wrong nb of philos\n"), false);
 	return (true);
 }
+
 bool	fill_struct(t_philo_p *params, char *av[])
 {
 	params->nb_philo = mini_atoi(av[0]);
@@ -39,6 +40,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 		params->meal_nb = mini_atoi(av[4]);
 	return (true);
 }
+
 bool	check_args(t_philo_p *params, int ac, char *av[])
 {
 	if (ac < 5 || ac > 6)
@@ -49,5 +51,4 @@ bool	check_args(t_philo_p *params, int ac, char *av[])
 		return (printf ("fill struct failed\n"), false);
 	return (true);
 }
-	// check les arguments pour verifier leurs validité et les ranger dans une struct.
-
+// check les arguments pour verifier leurs validité et les ranger dans une struc
