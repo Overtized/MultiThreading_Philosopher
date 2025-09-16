@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 18:46:32 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:10:31 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,9 @@ t_phil *init_philos(t_philo_p params)
 	t_phil	*philos;
 
 	i = 0;
-	while (i < params.nb_philo)
-	{
-		philos[i] = malloc (sizeof (t_phil) * 1);
-		if (!philos[i])
-			while (i > 0)
-			{
-				free (philos[i]);
-				i--;
-			}
-		i++;
-	}
-	copy_struct(params, philos);
-	return (philos);
-}
-void	copy_struct(t_philo_p params, t_phil *philos)
-{
-	int i;
-
-	i = 0;
+	philos = malloc (sizeof(t_phil) * params.nb_philo);
+	if (!philos)
+		return (printf("wtf dude\n"), NULL);
 	while (i < params.nb_philo)
 	{
 		philos[i].phil_name = i + 1;
@@ -47,4 +31,5 @@ void	copy_struct(t_philo_p params, t_phil *philos)
 			philos[i].meal_nb = params.meal_nb;
 		i++;
 	}
+	return (philos);
 }

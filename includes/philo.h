@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/15 18:30:44 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:10:35 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ bool	test_int(char *av[]);
 bool	is_not_int(char *str);
 bool	is_overflow(const char *str);
 bool	fill_struct(t_philo_p *params, char *av[]);
-void	copy_struct(t_philo_p params, t_phil *philos);
 int	mini_atoi(const char *str);
-t_phil *init_philos(t_philo_p params, t_phil **philos);
+t_phil *init_philos(t_philo_p params);
 
 #endif
