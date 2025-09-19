@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/16 18:43:19 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/19 15:49:59 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 int	main(int ac, char *av[])
 {
 	t_philo_p	params;
-	t_phil		*philos;
-
+	t_thread	philos;
+	
 	if (!check_args(&params, ac, av))
 		return (1);
-	philos = init_philos(params);
-	if (philos == NULL)
+	if (!init_philos(params, &philos))
 		return (printf("Struct init failed\n"), 1);
-	if (!init_threads(params, philos))
+	if (!init_threads(params, &philos))
 		return (printf("thread failure\n"), 1);
 	return (0);
 }
