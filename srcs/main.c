@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/23 15:17:03 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:03:09 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 int	main(int ac, char *av[])
 {
 	t_philo_p	params;
-	t_thread	philos;
-	
+	t_thread	*philos;
+
 	if (!check_args(&params, ac, av))
-		return (1);
-	if (!init_philos(params, &philos))
+		return (printf("args not valids\n"), 1);
+	philos = mini_calloc(params.nb_philo, sizeof(t_thread));
+	if (philos == NULL)
+		return (printf("calloc fail\n"), 1);
+	philos = init_philos(params, philos);
+	if (philos == NULL)
 		return (printf("Struct init failed\n"), 1);
-	print_params(params);
-	if (!init_threads(params, &philos))
+	print_params(philos);
+	if (!init_threads(params, philos))
 		return (printf("thread failure\n"), 1);
+	free(philos);
 	return (0);
 }
 // func de routine des philo 

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/23 15:07:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:24:40 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_thread
 	pthread_t		t;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	r_fork;
+	pthread_mutex_t	test;
 	int	nb_philo;
 	int	phil_name;
 	int	d_timer;
@@ -53,16 +54,18 @@ bool	test_int(char *av[]);
 bool	is_not_int(char *str);
 bool	is_overflow(const char *str);
 int		mini_atoi(const char *str);
+void	*mini_calloc(size_t nmemb, size_t size);
 //
 bool	fill_struct(t_philo_p *params, char *av[]);
-bool	init_philos(t_philo_p params, t_thread *phil);
+t_thread	*init_philos(t_philo_p params, t_thread *phil);
 //
 bool	init_threads(t_philo_p params, t_thread *philos);
 void	is_eating(t_thread	*philo);
 void	is_sleeping(t_thread	*philo);
 void	is_thinking(t_thread	*philo);
 //
-void	print_params(t_philo_p params);
+void	print_params(t_thread *params);
+void	free_struct(t_thread *philos);
 //
 // void	*routine2(void *params);
 //
