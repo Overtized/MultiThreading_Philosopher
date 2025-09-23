@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/19 15:55:17 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:07:44 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	init_philos(t_philo_p params, t_thread *phil)
 	while (i < params.nb_philo)
 	{
 		phil[i].phil_name = i + 1;
+		phil[i].nb_philo = params.nb_philo;
 		phil[i].d_timer = params.d_timer;
 		phil[i].e_timer = params.e_timer;
 		phil[i].s_timer = params.s_timer;
