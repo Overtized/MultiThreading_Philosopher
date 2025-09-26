@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/23 17:24:40 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/26 10:46:35 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_thread
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	r_fork;
 	pthread_mutex_t	test;
+	struct timeval	clock;
+	struct timeval	lastmeal;
 	int	nb_philo;
 	int	phil_name;
 	int	d_timer;
@@ -63,9 +65,10 @@ bool	init_threads(t_philo_p params, t_thread *philos);
 void	is_eating(t_thread	*philo);
 void	is_sleeping(t_thread	*philo);
 void	is_thinking(t_thread	*philo);
+bool	is_philo_dead(t_thread	*philo);
 //
 void	print_params(t_thread *params);
-void	free_struct(t_thread *philos);
+// void	free_struct(t_thread *philos);
 //
 // void	*routine2(void *params);
 //
