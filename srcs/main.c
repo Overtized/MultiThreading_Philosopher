@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 18:06:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:27:56 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	main(int ac, char *av[])
 		return (printf("thread failure\n"), 1);
 	free(philos);
 	return (0);
+	// to do refaire une struct avec tout les ;utexes en fonction du nombre ded philo
+	// garder les rfork et lfork pour le lock 
+	// passer le pointeur de fork dans une struct
 }
 // func de routine des philo 
 // func pour init les threads avec chaque phils

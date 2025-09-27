@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 19:22:06 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:27:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_thread
 {
 	pthread_t		t;
 	pthread_mutex_t *forks;
+	pthread_mutex_t r_fork;
+	pthread_mutex_t l_fork;
 	struct timeval	start_t;
 	double	converted_time;
 	double	last_meal;
