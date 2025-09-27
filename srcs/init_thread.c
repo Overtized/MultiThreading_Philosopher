@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pthread2.c                                         :+:      :+:    :+:   */
+/*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 19:16:53 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 00:59:06 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 static bool	philos_routine(t_thread	*philo)
 {
-	if (!is_eating(philo))
-		return (false);
-	is_sleeping(philo);
-	is_thinking(philo);
+	while (philo->meal_taken < philo->meal_nb)
+	{
+		if (!take_fork(philo))
+			return (false);
+		is_eating(philo);
+		putdown_fork(philo);
+		is_sleeping(philo);
+		is_thinking(philo);
+	}
 	return (true);
 }
 void	*start_diner(void *params)
@@ -40,14 +45,12 @@ void	*start_diner(void *params)
 }
 // a voir comment remonter l erreur si start dinner fail ? main wise
 
-bool	init_threads(t_philo_p params, t_thread *philos)
+bool	init_threads(t_philo_p *params, t_thread *philos)
 {
 	int	i;
 
 	i = 0;
-	if (!mutex_init(philos))
-			return (false);
-	while (i < params.nb_philo)
+	while (i < params->nb_philo)
 	{
 		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0)
 			return (perror("thread create fail\n"), false);
@@ -55,15 +58,13 @@ bool	init_threads(t_philo_p params, t_thread *philos)
 		i++;
 	}
 	i = 0;
-	while (i < params.nb_philo)
+	while (i < params->nb_philo)
 	{
 		if (pthread_join(philos[i].t, NULL) != 0)
 			return (perror("thread end fail\n"), false);
 		// printf("philo %d has finished\n", philos[i].phil_name);
 		i++;
 	}
-	if (!mutex_destroy(philos))
-			return (false);
 	return (true);
 }
 

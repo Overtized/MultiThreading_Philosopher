@@ -6,43 +6,25 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 19:24:36 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:37:54 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static bool	fork_circuit(t_thread	*philo)
-{
-	if (!is_philo_dead(philo))
-		return (false);
-	if (philo->nb_philo > 1)
-	{
-		pthread_mutex_lock(&philo->l_fork);
-		printf("philo %d, has taken a fork\n", philo->phil_name);
-	}
-	pthread_mutex_lock(&philo->r_fork);
-	printf("philo %d, has taken a fork\n", philo->phil_name);
-	return (true);
-	// revoir le fork sans r et l mais avec tab de fork et gestion de dispo de fork
-}
 
-bool	is_eating(t_thread	*philo)
+
+void	is_eating(t_thread	*philo)
 {
 	double	time_spent_eating;
 
 	time_spent_eating = 0;
 	time_spent_eating = philo->e_timer * 1000;
-	if (!fork_circuit(philo))
-		return (false);
 	printf("philo %d, is eating\n", philo->phil_name);
 	usleep(time_spent_eating);
 	philo->last_meal = philo->converted_time + time_spent_eating;
-	if (philo->nb_philo > 1)
-		pthread_mutex_unlock(&philo->l_fork);
-	pthread_mutex_unlock(&philo->r_fork);
+	philo->meal_taken += 1;
 	// revoir le fork sans r et l mais avec tab de fork et gestion de dispo de fork
-	return (true);
 }
 void	is_thinking(t_thread	*philo)
 {

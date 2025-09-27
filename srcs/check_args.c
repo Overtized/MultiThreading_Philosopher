@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 19:03:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 00:28:55 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ bool	test_int(char *av[])
 
 bool	fill_struct(t_philo_p *params, char *av[])
 {
+	int	i;
+
+	i = 0;
 	params->nb_philo = mini_atoi(av[0]);
 	params->d_timer = mini_atoi(av[1]);
 	params->e_timer = mini_atoi(av[2]);
@@ -40,6 +43,19 @@ bool	fill_struct(t_philo_p *params, char *av[])
 		params->meal_nb = mini_atoi(av[4]);
 	else
 		params->meal_nb = 1;
+	params->forks = mini_calloc(params->nb_philo, sizeof(pthread_mutex_t));
+	if (!params->forks)
+		return (false);
+	while (i < params->nb_philo)
+	{
+		if (pthread_mutex_init(&params->forks[i], NULL) != 0)
+		{
+			while (i > 0)
+				pthread_mutex_destroy(&params->forks[i--]);
+			return (free(params->forks), params->forks = NULL, false);
+		}
+		i++;
+	}
 	return (true);
 }
 

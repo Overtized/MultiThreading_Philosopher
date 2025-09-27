@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 19:27:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 23:56:42 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 int	main(int ac, char *av[])
 {
-	t_philo_p	params;
+	t_philo_p	*params;
 	t_thread	*philos;
 
-	if (!check_args(&params, ac, av))
-		return (printf("args not valids\n"), 1);
-	philos = mini_calloc(params.nb_philo, sizeof(t_thread));
-	if (philos == NULL)
+	params = mini_calloc(1, sizeof(t_philo_p));
+	if (params == NULL)
 		return (printf("calloc fail\n"), 1);
+	if (!check_args(params, ac, av))
+		return (free(params), 1);
+	philos = mini_calloc(params->nb_philo, sizeof(t_thread));
+	if (philos == NULL)
+		return (printf("calloc fail\n"), free(params), 1);
 	philos = init_philos(params, philos);
 	if (philos == NULL)
-		return (printf("Struct init failed\n"), 1);
+		return (printf("philo init fail\n"), free_struct(params, philos), 1);
 	print_params(philos);
 	if (!init_threads(params, philos))
-		return (printf("thread failure\n"), 1);
-	free(philos);
+		return (printf("thread fail\n"), free_struct(params, philos), 1);
+	free_struct(params, philos);
 	return (0);
 	// to do refaire une struct avec tout les ;utexes en fonction du nombre ded philo
 	// garder les rfork et lfork pour le lock 
