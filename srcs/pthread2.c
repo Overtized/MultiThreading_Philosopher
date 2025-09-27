@@ -3,48 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   pthread2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/26 10:49:32 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:16:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	*routine(void *params)
+static bool	philos_routine(t_thread	*philo)
 {
+	if (!is_eating(philo))
+		return (false);
+	is_sleeping(philo);
+	is_thinking(philo);
+	return (true);
+}
+void	*start_diner(void *params)
+{
+	int	i;
 	t_thread	*philo;
 
+	i = 0;
 	philo = (t_thread *) params;
-	if (gettimeofday(&philo->clock, NULL) == -1)
-		return(perror("gettime failure\n"), NULL);
-	if (philo->nb_philo > 1)
-		if (pthread_mutex_init(&philo->l_fork, NULL) != 0)
-			return (perror("mutex init issue\n"), NULL); 
-	if (pthread_mutex_init(&philo->r_fork, NULL) != 0)
-		return (perror("mutex init issue\n"), NULL); 
-	is_eating(philo);
-	// is_sleeping(philo);
-	// is_thinking(philo);
-	if (philo->nb_philo > 1)
-		if (pthread_mutex_destroy(&philo->l_fork) != 0)
-			return (perror("mutex init issue\n"), NULL); 
-	if (pthread_mutex_destroy(&philo->r_fork) != 0)
-		return (perror("mutex init issue\n"), NULL); 
+	if (gettimeofday(&philo->start_t, NULL) == -1)
+		return (perror("gettime failure\n"), NULL);
+	while (i < philo->meal_nb)
+	{
+		if (!philos_routine(philo))
+			break;
+		i++;
+	}
+	
 	return (NULL);
 }
+// a voir comment remonter l erreur si start dinner fail ? main wise
 
 bool	init_threads(t_philo_p params, t_thread *philos)
 {
-	int			i;
+	int	i;
 
 	i = 0;
+	if (!mutex_init(philos))
+			return (false);
 	while (i < params.nb_philo)
 	{
-		if (pthread_create(&philos[i].t, NULL, &routine, &philos[i]) != 0)
+		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0)
 			return (perror("thread create fail\n"), false);
-		printf("philo %d has started\n", philos[i].phil_name);
+		// printf("philo %d has started\n", philos[i].phil_name);
 		i++;
 	}
 	i = 0;
@@ -52,8 +59,11 @@ bool	init_threads(t_philo_p params, t_thread *philos)
 	{
 		if (pthread_join(philos[i].t, NULL) != 0)
 			return (perror("thread end fail\n"), false);
-		printf("philo %d has finished\n", philos[i].phil_name);
+		// printf("philo %d has finished\n", philos[i].phil_name);
 		i++;
 	}
+	if (!mutex_destroy(philos))
+			return (false);
 	return (true);
 }
+

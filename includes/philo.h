@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/26 10:46:35 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:22:06 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ typedef struct s_philo_p
 typedef struct s_thread
 {
 	pthread_t		t;
-	pthread_mutex_t	l_fork;
-	pthread_mutex_t	r_fork;
-	pthread_mutex_t	test;
-	struct timeval	clock;
-	struct timeval	lastmeal;
+	pthread_mutex_t *forks;
+	struct timeval	start_t;
+	double	converted_time;
+	double	last_meal;
 	int	nb_philo;
 	int	phil_name;
 	int	d_timer;
@@ -47,7 +46,9 @@ typedef struct s_thread
 	int	meal_nb;
 }	t_thread;
 
-void	*routine(void *params);
+void	*start_diner(void *params);
+bool	mutex_init(t_thread *philos);
+bool	mutex_destroy(t_thread *philos);
 int		*pthread_init(void);
 //
 bool	check_args(t_philo_p *params, int ac, char *av[]);
@@ -62,7 +63,7 @@ bool	fill_struct(t_philo_p *params, char *av[]);
 t_thread	*init_philos(t_philo_p params, t_thread *phil);
 //
 bool	init_threads(t_philo_p params, t_thread *philos);
-void	is_eating(t_thread	*philo);
+bool	is_eating(t_thread	*philo);
 void	is_sleeping(t_thread	*philo);
 void	is_thinking(t_thread	*philo);
 bool	is_philo_dead(t_thread	*philo);
@@ -70,7 +71,6 @@ bool	is_philo_dead(t_thread	*philo);
 void	print_params(t_thread *params);
 // void	free_struct(t_thread *philos);
 //
-// void	*routine2(void *params);
-//
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/23 15:19:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:03:23 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 	if (av[4])
 		params->meal_nb = mini_atoi(av[4]);
 	else
-		params->meal_nb = 0;
+		params->meal_nb = 1;
 	return (true);
 }
 

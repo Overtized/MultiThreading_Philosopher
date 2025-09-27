@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   mutexes_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 15:18:27 by mchanlia         ###   ########.fr       */
+/*   Created: 2025/09/27 18:57:19 by mchanlia          #+#    #+#             */
+/*   Updated: 2025/09/27 19:22:56 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-t_thread	*init_philos(t_philo_p params, t_thread *phil)
+bool	mutex_init(t_thread *philo)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	while (i < params.nb_philo)
+	while (i < philo->nb_philo)
 	{
-		phil[i].phil_name = i + 1;
-		phil[i].nb_philo = params.nb_philo;
-		phil[i].d_timer = params.d_timer;
-		phil[i].e_timer = params.e_timer;
-		phil[i].s_timer = params.s_timer;
-		if (params.meal_nb)
-			phil[i].meal_nb = params.meal_nb;
+		if (pthread_mutex_init(&philo->forks[i], NULL) != 0)
+			return (perror("mutex init issue\n"), false);
 		i++;
 	}
-	return (phil);
+	return (true);
+}
+
+bool	mutex_destroy(t_thread *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->nb_philo)
+	{
+		if (philo->nb_philo > 1)
+			if (pthread_mutex_destroy(&philo->forks[i]) != 0)
+				return (perror("mutex init issue\n"), false);
+		i++;
+	}
+	return (true);
 }
