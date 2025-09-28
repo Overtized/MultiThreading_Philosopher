@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 00:50:11 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:59:58 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_thread
 }	t_thread;
 
 void	*start_diner(void *params);
-// bool	forks_init(t_thread *philo);
 bool	init_threads(t_philo_p *params, t_thread *philos);
 //
 bool	check_args(t_philo_p *params, int ac, char *av[]);
@@ -62,7 +61,7 @@ int		mini_atoi(const char *str);
 void	*mini_calloc(size_t nmemb, size_t size);
 //
 bool	fill_struct(t_philo_p *params, char *av[]);
-t_thread	*init_philos(t_philo_p *params, t_thread *phil);
+void	init_philos(t_philo_p *params, t_thread *phil);
 //
 void	is_eating(t_thread	*philo);
 void	is_sleeping(t_thread	*philo);

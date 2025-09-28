@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 23:56:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:53:22 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	main(int ac, char *av[])
 	philos = mini_calloc(params->nb_philo, sizeof(t_thread));
 	if (philos == NULL)
 		return (printf("calloc fail\n"), free(params), 1);
-	philos = init_philos(params, philos);
-	if (philos == NULL)
-		return (printf("philo init fail\n"), free_struct(params, philos), 1);
+	init_philos(params, philos);
 	print_params(philos);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);

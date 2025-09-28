@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 23:37:54 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 11:28:43 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	is_eating(t_thread	*philo)
 	usleep(time_spent_eating);
 	philo->last_meal = philo->converted_time + time_spent_eating;
 	philo->meal_taken += 1;
-	// revoir le fork sans r et l mais avec tab de fork et gestion de dispo de fork
 }
 void	is_thinking(t_thread	*philo)
 {
@@ -54,7 +53,7 @@ bool	is_philo_dead(t_thread	*philo)
 
 	elapsed_time = 0;
 	philo->converted_time = 0;
-	usleep(1000);
+	usleep(1000); // a enlever
 	if (gettimeofday(&now_t, NULL) == -1)
 		return (printf ("gettime failure\n"), false);
 	elapsed_time = (now_t.tv_sec - philo->start_t.tv_sec) * 1000000 + (now_t.tv_usec - philo->start_t.tv_usec);

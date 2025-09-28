@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 00:59:06 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 11:29:37 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,27 @@
 
 static bool	philos_routine(t_thread	*philo)
 {
-	while (philo->meal_taken < philo->meal_nb)
-	{
-		if (!take_fork(philo))
-			return (false);
-		is_eating(philo);
-		putdown_fork(philo);
-		is_sleeping(philo);
-		is_thinking(philo);
-	}
+	if (!take_fork(philo))
+		return (false);
+	is_eating(philo);
+	putdown_fork(philo);
+	is_sleeping(philo);
+	is_thinking(philo);
 	return (true);
 }
 void	*start_diner(void *params)
 {
-	int	i;
 	t_thread	*philo;
 
-	i = 0;
 	philo = (t_thread *) params;
 	if (gettimeofday(&philo->start_t, NULL) == -1)
 		return (perror("gettime failure\n"), NULL);
-	while (i < philo->meal_nb)
+	while (philo->meal_taken < philo->meal_nb)
 	{
 		if (!philos_routine(philo))
 			break;
-		i++;
 	}
-	
-	return (NULL);
+	return(NULL);
 }
 // a voir comment remonter l erreur si start dinner fail ? main wise
 

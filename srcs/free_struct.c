@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:00:42 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 00:52:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/09/28 10:56:00 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ void	free_struct(t_philo_p *params, t_thread	*philos)
 		free(params);
 	}
 	if (philos)
+	{
+		pthread_mutex_destroy(philos->r_fork);
+		pthread_mutex_destroy(philos->l_fork);
 		free(philos);
+	}
 }
