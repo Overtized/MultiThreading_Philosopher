@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 10:51:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:37:05 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 	if (av[4])
 		params->meal_nb = mini_atoi(av[4]);
 	else
-		params->meal_nb = 1;
+		params->meal_nb = -1;
 	params->forks = mini_calloc(params->nb_philo, sizeof(pthread_mutex_t));
 	if (!params->forks)
 		return (false);

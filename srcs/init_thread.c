@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 11:29:37 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:38:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static bool	philos_routine(t_thread	*philo)
 {
-	if (!take_fork(philo))
-		return (false);
-	is_eating(philo);
-	putdown_fork(philo);
-	is_sleeping(philo);
 	is_thinking(philo);
+	if (!is_eating(philo))
+		return (false);
+	is_sleeping(philo);
 	return (true);
 }
 void	*start_diner(void *params)
@@ -29,10 +27,21 @@ void	*start_diner(void *params)
 	philo = (t_thread *) params;
 	if (gettimeofday(&philo->start_t, NULL) == -1)
 		return (perror("gettime failure\n"), NULL);
-	while (philo->meal_taken < philo->meal_nb)
+	if (philo->meal_nb > 0)
 	{
-		if (!philos_routine(philo))
-			break;
+		while (philo->meal_taken < philo->meal_nb)
+		{
+			if (!philos_routine(philo))
+				break;
+		}
+	}
+	else 
+	{
+		while (1)
+		{
+			if (!philos_routine(philo))
+				break;
+		}
 	}
 	return(NULL);
 }

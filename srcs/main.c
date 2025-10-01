@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 10:53:22 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:31:12 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,22 @@ int	main(int ac, char *av[])
 	t_philo_p	*params;
 	t_thread	*philos;
 
+	philos = NULL;
 	params = mini_calloc(1, sizeof(t_philo_p));
 	if (params == NULL)
 		return (printf("calloc fail\n"), 1);
 	if (!check_args(params, ac, av))
-		return (free(params), 1);
+		return (free_struct(params, philos), 1);
 	philos = mini_calloc(params->nb_philo, sizeof(t_thread));
 	if (philos == NULL)
-		return (printf("calloc fail\n"), free(params), 1);
+		return (printf("calloc fail\n"), free_struct(params, philos), 1);
 	init_philos(params, philos);
 	print_params(philos);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);
 	free_struct(params, philos);
 	return (0);
-	// to do refaire une struct avec tout les ;utexes en fonction du nombre ded philo
-	// garder les rfork et lfork pour le lock 
-	// passer le pointeur de fork dans une struct
+	// to do if mealnb not specified eat until die;
 }
 // func de routine des philo 
 // func pour init les threads avec chaque phils

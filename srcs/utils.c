@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 17:22:16 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/27 18:19:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:50:08 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void	*mini_calloc(size_t nmemb, size_t size)
 }
 void	print_params(t_thread *philos)
 {
-	printf("Param 1 is equal to %d this represent number of philos\n", philos[0].nb_philo);
-	printf("Param 2 is equal to %d this represent death timer in ms\n", philos[0].d_timer);
-	printf("Param 3 is equal to %d this represent time spent to eat in ms\n", philos[0].e_timer);
-	if (philos[0].meal_nb != 0)
-		printf("Param 5 is equal to %d this represent number of meal needed\n", philos[0].meal_nb);
-	printf("Param 4 is equal to %d this represent sleep time\n\n", philos[0].s_timer);
+	printf("Param 1 is equal to %d this represent number of philos\n", philos->nb_philo);
+	printf("Param 2 is equal to %d this represent death timer in ms\n", philos->d_timer);
+	printf("Param 3 is equal to %d this represent time spent to eat in ms\n", philos->e_timer);
+	printf("Param 4 is equal to %d this represent sleep time in ms\n\n", philos->s_timer);
+	if (philos->meal_nb != 0)
+		printf("Param 5 is equal to %d this represent number of meal needed\n\n", philos->meal_nb);
 }
 

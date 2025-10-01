@@ -6,32 +6,29 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 18:57:19 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 11:27:41 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:43:56 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-bool	take_fork(t_thread	*philo)
+ void	take_fork(t_thread	*philo)
 {
-	if (!is_philo_dead(philo))
-		return (false);
 	if (philo->phil_name % 2 == 0)
 	{
 		if (philo->nb_philo > 1)
 			pthread_mutex_lock(philo->r_fork);
 		pthread_mutex_lock(philo->l_fork);
-		printf("philo %d, has taken a fork\n", philo->phil_name);
+		
+		printf("%d ms: %d, has taken a fork\n",philo->converted_time, philo->phil_name); // pair
 	}
 	else
 	{
 		if (philo->nb_philo > 1)
 			pthread_mutex_lock(philo->l_fork);
 		pthread_mutex_lock(philo->r_fork);
-		printf("philo %d, has taken a fork\n", philo->phil_name);
+		printf("%d ms: %d, has taken a fork\n",philo->converted_time, philo->phil_name); // impair
 	}
-	return (true);
-	// revoir le fork sans r et l mais avec tab de fork et gestion de dispo de fork
 }
 void	putdown_fork(t_thread	*philo)
 {
@@ -40,11 +37,13 @@ void	putdown_fork(t_thread	*philo)
 		if (philo->nb_philo > 1)
 			pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(philo->l_fork);
+		printf("%d ms: %d, has put down a fork\n",philo->converted_time, philo->phil_name); // pair // a enlever
 	}
 	else
 	{
 		if (philo->nb_philo > 1)
 			pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
+		printf("%d ms: %d, has put down a fork\n",philo->converted_time, philo->phil_name); // impair // a enlever
 	}
 }

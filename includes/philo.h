@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/09/28 10:59:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:01:35 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_thread
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
 	struct timeval	start_t;
-	double	converted_time;
-	double	last_meal;
+	int	converted_time;
+	int	last_meal_t;
 	int	nb_philo;
 	int	phil_name;
 	int	d_timer;
@@ -63,15 +63,17 @@ void	*mini_calloc(size_t nmemb, size_t size);
 bool	fill_struct(t_philo_p *params, char *av[]);
 void	init_philos(t_philo_p *params, t_thread *phil);
 //
-void	is_eating(t_thread	*philo);
+bool	is_eating(t_thread	*philo);
 void	is_sleeping(t_thread	*philo);
 void	is_thinking(t_thread	*philo);
 bool	is_philo_dead(t_thread	*philo);
-bool	take_fork(t_thread	*philo);
+void	take_fork(t_thread	*philo);
 void	putdown_fork(t_thread	*philo);
 //
 void	print_params(t_thread *params);
 void	free_struct(t_philo_p *params, t_thread	*philos);
+bool	get_time(t_thread	*philo);
+
 //
 
 
