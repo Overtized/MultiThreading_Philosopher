@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/01 16:56:41 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:26:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 	{
 		phil[i].phil_name = i + 1;
 		phil[i].nb_philo = params->nb_philo;
+		phil[i].ready_to_eat = false;
+		phil[i].is_alive = params->is_alive;
+		phil[i].state_change = true;
+		phil[i].last_meal_t = 0;
+		phil[i].elapsed_t = 0;
 		phil[i].d_timer = params->d_timer;
 		phil[i].e_timer = params->e_timer;
 		phil[i].s_timer = params->s_timer;
@@ -31,3 +36,4 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 		i++;
 	}
 }
+

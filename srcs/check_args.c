@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/01 17:37:05 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:27:16 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,11 @@ bool	test_int(char *av[])
 		return (printf ("wrong nb of philos\n"), false);
 	return (true);
 }
-
-bool	fill_struct(t_philo_p *params, char *av[])
+static bool	init_m_tab(t_philo_p *params)
 {
 	int	i;
 
 	i = 0;
-	params->nb_philo = mini_atoi(av[0]);
-	params->d_timer = mini_atoi(av[1]);
-	params->e_timer = mini_atoi(av[2]);
-	params->s_timer = mini_atoi(av[3]);
-	if (av[4])
-		params->meal_nb = mini_atoi(av[4]);
-	else
-		params->meal_nb = -1;
 	params->forks = mini_calloc(params->nb_philo, sizeof(pthread_mutex_t));
 	if (!params->forks)
 		return (false);
@@ -56,6 +47,24 @@ bool	fill_struct(t_philo_p *params, char *av[])
 		}
 		i++;
 	}
+	return (true);
+}
+bool	fill_struct(t_philo_p *params, char *av[])
+{
+	int	i;
+
+	i = 0;
+	params->nb_philo = mini_atoi(av[0]);
+	params->d_timer = mini_atoi(av[1]);
+	params->e_timer = mini_atoi(av[2]);
+	params->s_timer = mini_atoi(av[3]);
+	if (av[4])
+		params->meal_nb = mini_atoi(av[4]);
+	else
+		params->meal_nb = -1;
+	params->is_alive = true; 
+	if (!init_m_tab(params))
+		return (false);
 	return (true);
 }
 

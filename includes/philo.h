@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/01 17:01:35 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:27:21 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,17 @@
 # include <stdbool.h>
 # include <limits.h>
 
-typedef struct s_philo_p
-{
-	pthread_mutex_t *forks;
-	int	nb_philo;
-	int	d_timer;
-	int	e_timer;
-	int	s_timer;
-	int	meal_nb;
-}	t_philo_p;
-
 typedef struct s_thread
 {
 	pthread_t		t;
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
-	struct timeval	start_t;
-	int	converted_time;
-	int	last_meal_t;
+	long	start_time;
+	bool	ready_to_eat;
+	bool	is_alive;
+	bool	state_change;
+	int	elapsed_t;
+	long	last_meal_t;
 	int	nb_philo;
 	int	phil_name;
 	int	d_timer;
@@ -49,6 +42,17 @@ typedef struct s_thread
 	int	meal_taken;
 }	t_thread;
 
+typedef struct s_philo_p
+{
+	pthread_mutex_t *forks;
+	pthread_t	monitor;
+	bool	is_alive;
+	int	nb_philo;
+	int	d_timer;
+	int	e_timer;
+	int	s_timer;
+	int	meal_nb;
+}	t_philo_p;
 void	*start_diner(void *params);
 bool	init_threads(t_philo_p *params, t_thread *philos);
 //
@@ -63,17 +67,19 @@ void	*mini_calloc(size_t nmemb, size_t size);
 bool	fill_struct(t_philo_p *params, char *av[]);
 void	init_philos(t_philo_p *params, t_thread *phil);
 //
-bool	is_eating(t_thread	*philo);
-void	is_sleeping(t_thread	*philo);
+void	*is_eating(t_thread	*philo);
+void	*is_sleeping(t_thread	*philo);
 void	is_thinking(t_thread	*philo);
-bool	is_philo_dead(t_thread	*philo);
+void	*is_philo_dead(t_thread	*philo);
 void	take_fork(t_thread	*philo);
 void	putdown_fork(t_thread	*philo);
 //
 void	print_params(t_thread *params);
 void	free_struct(t_philo_p *params, t_thread	*philos);
-bool	get_time(t_thread	*philo);
-
+long	get_time_death(t_thread	*philo);
+long	get_eat_time(t_thread *philo);
+long	get_time(void);
+void	*ft_usleep(long time_to_wait, t_thread *philo);
 //
 
 

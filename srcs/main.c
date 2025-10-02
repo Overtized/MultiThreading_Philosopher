@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/01 17:31:12 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:26:45 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	main(int ac, char *av[])
 	if (philos == NULL)
 		return (printf("calloc fail\n"), free_struct(params, philos), 1);
 	init_philos(params, philos);
-	print_params(philos);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);
+	print_params(philos);
 	free_struct(params, philos);
 	return (0);
-	// to do if mealnb not specified eat until die;
+	// to do arreter al simu des que un philo meurt tout de suite et proteger var avec mutex
 }
 // func de routine des philo 
 // func pour init les threads avec chaque phils
