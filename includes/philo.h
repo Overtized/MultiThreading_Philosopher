@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 12:07:09 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:03:21 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_thread
 	pthread_t		t;
 	pthread_mutex_t *r_fork;
 	pthread_mutex_t *l_fork;
+	pthread_mutex_t print;
 	long	start_time;
 	bool	ready_to_eat;
 	bool	is_alive;
@@ -45,9 +46,7 @@ typedef struct s_thread
 typedef struct s_philo_p
 {
 	pthread_mutex_t *forks;
-	pthread_mutex_t *death;
-	pthread_t	monitor;
-	t_thread	*phil;
+	pthread_mutex_t death;
 	int	phil_name;
 	int	nb_philo;
 	int	d_timer;
@@ -55,6 +54,7 @@ typedef struct s_philo_p
 	int	s_timer;
 	int	meal_nb;
 }	t_philo_p;
+
 void	*start_diner(void *params);
 bool	init_threads(t_philo_p *params, t_thread *philos);
 //
@@ -71,18 +71,17 @@ void	init_philos(t_philo_p *params, t_thread *phil);
 //
 void	*is_eating(t_thread	*philo);
 void	*is_sleeping(t_thread	*philo);
-void	is_thinking(t_thread	*philo);
+void	*is_thinking(t_thread	*philo);
 void	*is_philo_dead(t_thread	*philo);
 void	take_fork(t_thread	*philo);
 void	putdown_fork(t_thread	*philo);
 //
 void	print_params(t_thread *params);
+void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time_death(t_thread	*philo);
-long	get_eat_time(t_thread *philo);
 long	get_time(void);
 void	*ft_usleep(long time_to_wait, t_thread *philo);
 //
-
 
 #endif

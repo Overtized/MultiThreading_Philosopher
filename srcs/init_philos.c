@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 12:33:06 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:36:04 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 		phil[i].is_alive = true;
 		phil[i].state_change = true;
 		phil[i].last_meal_t = 0;
+		phil[i].meal_taken = 0;
 		phil[i].elapsed_t = 0;
 		phil[i].start_time = get_time();
 		phil[i].d_timer = params->d_timer;

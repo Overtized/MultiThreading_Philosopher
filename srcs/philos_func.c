@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 12:11:49 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:02:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,43 @@ void	*is_eating(t_thread	*philo)
 	philo->state_change = 1;
 	if (philo->ready_to_eat)
 	{
+		if(philo->is_alive == false)
+			return (NULL);
 		new_time = get_time();
 		if (new_time == -1)
 			return(NULL);
 		new_time = new_time - philo->start_time;
 		printf("%d ms: %d, is eating\n",philo->elapsed_t, philo->phil_name);
-		if(philo->is_alive == false)
-			return (NULL);
 		if (ft_usleep(philo->e_timer, philo) == NULL)
 		 	return(NULL);
 		philo->last_meal_t = new_time;
 		philo->meal_taken += 1;
-		putdown_fork(philo);
-		return ((void*)1);
 	}
+	putdown_fork(philo);
 	return ((void*)1);
 }
-void	is_thinking(t_thread	*philo)
+void	*is_thinking(t_thread	*philo)
 {
+	if (philo->is_alive == false)
+		return (NULL);
 	if (philo->state_change == 1)
 	{
 		printf("%d ms: %d, is thinking\n",philo->elapsed_t, philo->phil_name);
 		philo->state_change = 0;
 	}
+	return ((void *)1);
 }
 
 void	*is_sleeping(t_thread	*philo)
 {
-	printf("%d ms: %d, is sleeping\n",philo->elapsed_t, philo->phil_name);
 	if(philo->is_alive == false)
 		return (NULL);
-	if (ft_usleep(philo->s_timer, philo) == NULL)
-		return(NULL);
+	if (philo->meal_taken > 0)
+	{
+		printf("%d ms: %d, is sleeping\n",philo->elapsed_t, philo->phil_name);
+		if (ft_usleep(philo->s_timer, philo) == NULL)
+			return(NULL);
+	}
 	return ((void *)1);
 }
 void	*is_philo_dead(t_thread	*philo)
