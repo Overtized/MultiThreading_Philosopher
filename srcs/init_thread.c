@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 14:03:02 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:38:43 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 		{
 			now = get_time() - philos[i].start_time;
 			// printf("value is %ld\n", now);
-			// printf("start is %ld\n", data.phil[i].start_time);
-			// printf("last meal is %ld\n", data.phil[i].last_meal_t);
+			// printf("start is %ld\n", philos[i].start_time);
+			// printf("last meal is %ld\n", philos[i].last_meal_t);
+			// printf("death time is %d\n", philos[i].d_timer);
 			if (now - philos[i].last_meal_t > philos[i].d_timer) 
 			{
 				philos[i].is_alive = false;
-				print_message(&philos[i], "died");
+				print_message(&philos[i], ", died\n");
 				return (NULL);
 			}
 			i++;

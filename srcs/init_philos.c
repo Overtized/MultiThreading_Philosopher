@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 13:36:04 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:59:49 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 		phil[i].nb_philo = params->nb_philo;
 		phil[i].ready_to_eat = false;
 		phil[i].is_alive = true;
+		phil[i].someone_died = false;
 		phil[i].state_change = true;
 		phil[i].last_meal_t = 0;
 		phil[i].meal_taken = 0;

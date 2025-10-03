@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 11:33:26 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:33:16 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ static bool	init_m_tab(t_philo_p *params)
 }
 bool	fill_struct(t_philo_p *params, char *av[])
 {
-	int	i;
-
-	i = 0;
 	params->nb_philo = mini_atoi(av[0]);
 	params->d_timer = mini_atoi(av[1]);
 	params->e_timer = mini_atoi(av[2]);

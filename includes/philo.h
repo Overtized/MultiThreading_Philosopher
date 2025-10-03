@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 14:03:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:22:24 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_thread
 	bool	ready_to_eat;
 	bool	is_alive;
 	bool	state_change;
+	bool	someone_died;
 	int	elapsed_t;
 	long	last_meal_t;
 	int	nb_philo;
@@ -81,7 +82,7 @@ void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time_death(t_thread	*philo);
 long	get_time(void);
-void	*ft_usleep(long time_to_wait, t_thread *philo);
+void	*ft_usleep(long time_to_wait);
 //
 
 #endif

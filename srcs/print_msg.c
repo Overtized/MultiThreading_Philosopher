@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:45:53 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 14:02:20 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:42:34 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	print_message(t_thread *philos, const char *msg)
 {
-	if (philos->is_alive == false)
+	if (philos->someone_died == false)
 	{
 		pthread_mutex_lock(&philos->print);
-		printf ("%d ms: %d died\n", philos[0].elapsed_t, philos[0].phil_name);
+		if (philos->is_alive == true)
+			printf("%d ms: %d %s\n", philos->elapsed_t, philos->phil_name, msg);
+		else if (philos->is_alive == false)
+		{
+			printf("%d ms: %d %s\n", philos->elapsed_t, philos->phil_name, msg);
+			philos->someone_died = true;
+		}
 		pthread_mutex_unlock(&philos->print);
-		return ;
 	}
+	return ;
 	// a refaire pour print n'importe quel message q pqrtir de l qpelqnt pas dans la func
 }

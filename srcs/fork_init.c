@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 18:57:19 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 13:28:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:52:50 by maxence          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 			pthread_mutex_lock(philo->r_fork);
 			philo->ready_to_eat = true;
 		}
-		printf("%d ms: %d, has taken a fork\n",philo->elapsed_t, philo->phil_name); // pair
+		if (philo->state_change == 1)
+			print_message(philo, ", has taken a fork\n");
+		// printf("%d ms: %d, has taken a fork\n",philo->elapsed_t, philo->phil_name); // pair
 	}
 	else
 	{
@@ -32,7 +34,9 @@
 			pthread_mutex_lock(philo->l_fork);
 			philo->ready_to_eat = true;
 		}
-		printf("%d ms: %d, has taken a fork\n",philo->elapsed_t, philo->phil_name); // impair
+		if (philo->state_change == 1)
+			print_message(philo, ", has taken a fork\n");
+		// printf("%d ms: %d, has taken a fork\n",philo->elapsed_t, philo->phil_name); // impair
 	}
 }
 void	putdown_fork(t_thread	*philo)
@@ -45,7 +49,8 @@ void	putdown_fork(t_thread	*philo)
 			pthread_mutex_unlock(philo->r_fork);
 			philo->ready_to_eat = false;
 		}
-		printf("%d ms: %d, has put down a fork\n",philo->elapsed_t, philo->phil_name); // pair // a enlever
+		// print_message(philo, ", has put down a fork\n");
+		// printf("%d ms: %d, has put down a fork\n",philo->elapsed_t, philo->phil_name); // pair // a enlever
 	}
 	else
 	{
@@ -55,6 +60,7 @@ void	putdown_fork(t_thread	*philo)
 			pthread_mutex_unlock(philo->l_fork);
 			philo->ready_to_eat = false;
 		}
-		printf("%d ms: %d, has put down a fork\n",philo->elapsed_t, philo->phil_name); // impair // a enlever
+		// print_message(philo, ", has put down a fork\n");
+		// printf("%d ms: %d, has put down a fork\n",philo->elapsed_t, philo->phil_name); // impair // a enlever
 	}
 }
