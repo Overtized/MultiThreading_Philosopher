@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 20:27:16 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:33:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 		params->meal_nb = mini_atoi(av[4]);
 	else
 		params->meal_nb = -1;
-	params->is_alive = true; 
+	params->phil_name = -1;
 	if (!init_m_tab(params))
 		return (false);
 	return (true);

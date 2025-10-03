@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 17:22:16 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 18:39:19 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 10:51:42 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	print_params(t_thread *philos)
 	printf("Param 2 is equal to %d this represent death timer in ms\n", philos->d_timer);
 	printf("Param 3 is equal to %d this represent time spent to eat in ms\n", philos->e_timer);
 	printf("Param 4 is equal to %d this represent sleep time in ms\n", philos->s_timer);
-	if (philos->meal_nb != 0)
+	if (philos->meal_nb != -1)
 		printf("Param 5 is equal to %d this represent number of meal needed\n", philos->meal_nb);
 }
 

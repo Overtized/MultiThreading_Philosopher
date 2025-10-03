@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 20:27:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:07:09 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ typedef struct s_thread
 typedef struct s_philo_p
 {
 	pthread_mutex_t *forks;
+	pthread_mutex_t *death;
 	pthread_t	monitor;
-	bool	is_alive;
+	t_thread	*phil;
+	int	phil_name;
 	int	nb_philo;
 	int	d_timer;
 	int	e_timer;

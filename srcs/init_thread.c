@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 20:27:00 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:36:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,48 @@ static bool	philos_routine(t_thread	*philo)
 		if (is_sleeping(philo) == NULL)
 			return (false);
 	}
-	is_thinking(philo);
-	if (is_philo_dead(philo) == NULL || philo->is_alive == false )
+	if (philo->is_alive == false)
 		return (false);
+	is_thinking(philo);
 	return (true);
 }
 void	*monitor(void *params)
 {
-	t_philo_p	*data;
+	t_philo_p	data;
+	t_thread	*phil;
+	int	i;
+	long	now;
 
-	data = (t_philo_p *) params;
-	printf("hello from monitor \n");
-	// while (data->is_alive)
-	// {
-	// 	if (data->is_alive == false)
-	// 	return (NULL);
-	// }
-	return ((void *)1);
+	i = 0;
+	now = 0;
+	phil = (t_thread *) params;
+	data.phil = phil;
+	while (1)
+	{
+		i = 0;
+		while (i < phil->nb_philo)
+		{
+			now = get_time() - data.phil[i].start_time;
+			// printf("value is %ld\n", now);
+			// printf("start is %ld\n", data.phil[i].start_time);
+			// printf("last meal is %ld\n", data.phil[i].last_meal_t);
+			if (now - data.phil[i].last_meal_t > data.phil[i].d_timer) 
+			{
+				data.phil[i].is_alive = false;
+				printf ("%d ms: %d died\n", data.phil[i].elapsed_t, data.phil[i].phil_name);
+				return (NULL);
+			}
+			i++;
+		}
+		usleep(500);
+	}
+	return (NULL);
 }
 void	*start_diner(void *params)
 {
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
-	philo->start_time = get_time();
 	if (philo->meal_nb > 0)
 	{
 		while (philo->meal_taken < philo->meal_nb)
@@ -76,7 +94,7 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 			return (perror("thread create fail\n"), false);
 		i++;
 	}
-	if (pthread_create(&params->monitor, NULL, &monitor, &philos[i]) != 0)
+	if (pthread_create(&params->monitor, NULL, &monitor, philos) != 0)
 		return (perror("thread create fail\n"), false);
 	i = 0;
 	while (i < params->nb_philo)

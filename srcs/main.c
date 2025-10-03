@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 20:26:45 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:13:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int ac, char *av[])
 	init_philos(params, philos);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);
-	print_params(philos);
 	free_struct(params, philos);
 	return (0);
 	// to do arreter al simu des que un philo meurt tout de suite et proteger var avec mutex
