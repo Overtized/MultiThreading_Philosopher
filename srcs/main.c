@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 11:13:53 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:25:33 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,26 @@ int	main(int ac, char *av[])
 	philos = mini_calloc(params->nb_philo, sizeof(t_thread));
 	if (philos == NULL)
 		return (printf("calloc fail\n"), free_struct(params, philos), 1);
-	init_philos(params, philos);
+	if (init_philos(params, philos) == NULL)
+		return (free_struct(params, philos), 1);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);
 	free_struct(params, philos);
 	return (0);
-	// to do arreter al simu des que un philo meurt tout de suite et proteger var avec mutex
+	// to do corriger ce genre d output : 
+// ➜  philosopher git:(main) ✗ make && ./philo 2 100 50 51
+// make: Nothing to be done for 'all'.
+// 0 ms: 1 , has taken a fork
+
+// 0 ms: 1 , is eating
+
+// 55 ms: 1 , is sleeping
+
+// 0 ms: 2 , has taken a fork
+
+// 55 ms: 2 , is eating
+
+// 55 ms: 1 , died
 }
 // func de routine des philo 
 // func pour init les threads avec chaque phils

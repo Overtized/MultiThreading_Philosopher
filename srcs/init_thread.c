@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 17:38:43 by maxence          ###   ########.fr       */
+/*   Updated: 2025/10/04 16:00:37 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,34 @@ static bool	philos_routine(t_thread	*philo)
 		return (false);
 	return (true);
 }
+static void	death_msg(t_thread *philos, t_philo_p *params, int i)
+{
+	pthread_mutex_lock(&philos->params->death);
+	philos[i].is_alive = false;
+	params->stop = true;
+	pthread_mutex_unlock(&philos->params->death);
+	print_message(&philos[i], ", died\n");
+}
 void	*monitor(t_philo_p *params, t_thread *philos)
 {
 	int	i;
 	long	now;
+	long	last_meal;
 
-	i = 0;
 	now = 0;
+	last_meal = 0;
 	while (1)
 	{
 		i = 0;
 		while (i < params->nb_philo)
 		{
+			pthread_mutex_lock(&philos[i].last_meal);
+			last_meal = philos[i].last_meal_t;
+			pthread_mutex_unlock(&philos[i].last_meal);
 			now = get_time() - philos[i].start_time;
-			// printf("value is %ld\n", now);
-			// printf("start is %ld\n", philos[i].start_time);
-			// printf("last meal is %ld\n", philos[i].last_meal_t);
-			// printf("death time is %d\n", philos[i].d_timer);
-			if (now - philos[i].last_meal_t > philos[i].d_timer) 
+			if (now - last_meal > philos[i].d_timer) 
 			{
-				philos[i].is_alive = false;
-				print_message(&philos[i], ", died\n");
+				death_msg(philos, params, i);
 				return (NULL);
 			}
 			i++;
@@ -51,6 +58,7 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 	}
 	return (NULL);
 }
+
 void	*start_diner(void *params)
 {
 	t_thread	*philo;
@@ -81,8 +89,6 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 	int	i;
 
 	i = 0;
-	pthread_mutex_init(&params->death, NULL);
-	pthread_mutex_init(&philos->print, NULL);
 	while (i < params->nb_philo)
 	{
 		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0)
@@ -98,7 +104,7 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 		i++;
 	}
 	pthread_mutex_destroy(&params->death);
-	pthread_mutex_destroy(&philos->print);
+	pthread_mutex_destroy(&params->print);
 	return (true);
 }
 

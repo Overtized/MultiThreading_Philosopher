@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 14:33:16 by maxence          ###   ########.fr       */
+/*   Updated: 2025/10/04 15:59:25 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ static bool	init_m_tab(t_philo_p *params)
 	while (i < params->nb_philo)
 	{
 		if (pthread_mutex_init(&params->forks[i], NULL) != 0)
-		{
-			while (i > 0)
-				pthread_mutex_destroy(&params->forks[i--]);
-			return (free(params->forks), params->forks = NULL, false);
-		}
+			return (false);
 		i++;
 	}
+	pthread_mutex_init(&params->death, NULL);
+	pthread_mutex_init(&params->print, NULL);
 	return (true);
 }
 bool	fill_struct(t_philo_p *params, char *av[])
@@ -62,6 +60,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 	params->phil_name = -1;
 	if (!init_m_tab(params))
 		return (false);
+	params->stop = false;
 	return (true);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxence <maxence@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/03 16:59:49 by maxence          ###   ########.fr       */
+/*   Updated: 2025/10/04 16:01:16 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	init_philos(t_philo_p *params, t_thread *phil)
+void	*init_philos(t_philo_p *params, t_thread *phil)
 {
 	int		i;
 
@@ -23,8 +23,9 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 		phil[i].nb_philo = params->nb_philo;
 		phil[i].ready_to_eat = false;
 		phil[i].is_alive = true;
-		phil[i].someone_died = false;
 		phil[i].state_change = true;
+		phil[i].params = params;
+		phil[i].stop = params->stop;
 		phil[i].last_meal_t = 0;
 		phil[i].meal_taken = 0;
 		phil[i].elapsed_t = 0;
@@ -34,9 +35,11 @@ void	init_philos(t_philo_p *params, t_thread *phil)
 		phil[i].s_timer = params->s_timer;
 		phil[i].r_fork = &params->forks[i];
 		phil[i].l_fork = &params->forks[(i + 1) % params->nb_philo];
-		if (params->meal_nb)
-			phil[i].meal_nb = params->meal_nb;
+		phil[i].meal_nb = params->meal_nb;
+		if (pthread_mutex_init(&phil[i].last_meal, NULL) != 0)
+			return (NULL);
 		i++;
 	}
+	return ((void *) 1);
 }
 

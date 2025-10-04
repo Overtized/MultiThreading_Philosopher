@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:00:42 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/02 20:27:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:10:01 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_struct(t_philo_p *params, t_thread	*philos)
 		while (i < params->nb_philo)
 		{
 			pthread_mutex_destroy(&params->forks[i]);
+			pthread_mutex_destroy(&philos[i].last_meal);
 			i++;
 		}
 		free(params->forks);
