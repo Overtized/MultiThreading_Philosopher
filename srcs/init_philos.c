@@ -6,35 +6,35 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 17:22:44 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:04:11 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// static void	*load_params(t_philo_p *params, t_thread *phil, int i)
-// {
-// 	phil->phil_name = i + 1;
-// 	phil->nb_philo = params->nb_philo;
-// 	phil->d_timer = params->d_timer;
-// 	phil->e_timer = params->e_timer;
-// 	phil->s_timer = params->s_timer;
-// 	phil->meal_nb = params->meal_nb;
-// 	phil->last_meal_t = 0;
-// 	phil->meal_taken = 0;
-// 	phil->elapsed_t = 0;
-// 	phil->ready_to_eat = false;
-// 	phil->is_alive = true;
-// 	phil->state_change = true;
-// 	phil->stop = params->stop;
-// 	phil->r_fork = &params->forks[i];
-// 	phil->l_fork = &params->forks[(i + 1) % params->nb_philo];
-// 	phil->start_time = get_time();
-// 	if (pthread_mutex_init(&phil->last_meal, NULL) != 0)
-// 		return (NULL);
-// 	phil->params = params;
-// 	return ((void *) 1);
-// }
+static void	*load_params(t_philo_p *params, t_thread *phil, int i)
+{
+	phil->phil_name = i + 1;
+	phil->nb_philo = params->nb_philo;
+	phil->d_timer = params->d_timer;
+	phil->e_timer = params->e_timer;
+	phil->s_timer = params->s_timer;
+	phil->meal_nb = params->meal_nb;
+	phil->last_meal_t = 0;
+	phil->meal_taken = 0;
+	phil->elapsed_t = 0;
+	phil->ready_to_eat = false;
+	phil->is_alive = true;
+	phil->state_change = true;
+	phil->stop = params->stop;
+	phil->r_fork = &params->forks[i];
+	phil->l_fork = &params->forks[(i + 1) % params->nb_philo];
+	phil->start_time = get_time();
+	if (pthread_mutex_init(&phil->last_meal, NULL) != 0)
+		return (NULL);
+	phil->params = params;
+	return ((void *) 1);
+}
 
 void	*init_philos(t_philo_p *params, t_thread *phil)
 {
@@ -43,28 +43,10 @@ void	*init_philos(t_philo_p *params, t_thread *phil)
 	i = 0;
 	while (i < params->nb_philo)
 	{
-		// if (load_params(params, &phil[i], i) == NULL)
-		// 	return (NULL);
-		phil[i].phil_name = i + 1;
-		phil[i].nb_philo = params->nb_philo;
-		phil[i].ready_to_eat = false;
-		phil[i].is_alive = true;
-		phil[i].state_change = true;
-		phil[i].params = params;
-		phil[i].stop = params->stop;
-		phil[i].last_meal_t = 0;
-		phil[i].meal_taken = 0;
-		phil[i].elapsed_t = 0;
-		phil[i].start_time = get_time();
-		phil[i].d_timer = params->d_timer;
-		phil[i].e_timer = params->e_timer;
-		phil[i].s_timer = params->s_timer;
-		phil[i].r_fork = &params->forks[i];
-		phil[i].l_fork = &params->forks[(i + 1) % params->nb_philo];
-		phil[i].meal_nb = params->meal_nb;
-		if (pthread_mutex_init(&phil[i].last_meal, NULL) != 0)
+		if (load_params(params, &phil[i], i) == NULL)
 			return (NULL);
 		i++;
 	}
 	return ((void *) 1);
 }
+
