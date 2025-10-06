@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:45:53 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 18:00:07 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:26:57 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_message(t_thread *philos, const char *msg)
 			printf("%d ms: %d %s\n", philos->elapsed_t, philos->phil_name, msg);
 		else if (philos->is_alive == false)
 		{
-			printf("%d ms: %d %s\n", philos->elapsed_t, philos->phil_name, msg);
+			printf("%d ms: %d %s\n", philos->params->d_timer, philos->phil_name, msg); // pas sur de laisser d time peut etre elapsed time plutot 
 			philos->params->someone_died = true;
 		}
 	}

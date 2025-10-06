@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 16:47:26 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:36:17 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ long	get_time(void)
 }
 
 // t since epoch in ms
-void	*ft_usleep(long time_to_wait)
+void	*ft_usleep(long time_to_wait, t_thread *philo)
 {
 	long	end_t;
 
 	end_t = get_time() + time_to_wait;
 	while (get_time() < end_t)
+	{
+		if (check_thread_death(philo) == NULL)
+			return(NULL);
 		usleep(500);
+	}
 	return ((void *)1);
 }

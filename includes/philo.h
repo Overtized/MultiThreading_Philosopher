@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 16:24:34 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:36:42 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time_death(t_thread	*philo);
 long	get_time(void);
-void	*ft_usleep(long time_to_wait);
+void	*ft_usleep(long time_to_wait, t_thread *philo);
 //
 
 #endif
