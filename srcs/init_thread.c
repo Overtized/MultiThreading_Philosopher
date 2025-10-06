@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 17:56:18 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 22:10:46 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ static bool	philos_routine(t_thread	*philo)
 
 static void	death_msg(t_thread *philos, t_philo_p *params, int i)
 {
+	long	time;
+
+	time = get_time();
+	philos[i].elapsed_t = time - philos[i].start_time;
 	pthread_mutex_lock(&philos->params->death);
 	philos[i].is_alive = false;
 	params->stop = true;
@@ -38,7 +42,6 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 	long	now;
 	long	last_meal;
 
-	now = 0;
 	last_meal = 0;
 	while (1)
 	{
@@ -54,8 +57,10 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 			i++;
 		}
 		usleep(500);
+		pthread_mutex_lock(&params->meal_complete_m);
 		if (params->meal_complete == params->nb_philo)
-			return (NULL);
+			return (pthread_mutex_unlock(&params->meal_complete_m), NULL);
+		pthread_mutex_unlock(&params->meal_complete_m);
 	}
 	return (NULL);
 }
@@ -65,30 +70,28 @@ void	*start_diner(void *params)
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
+	if (philo->phil_name % 2 == 0)
+		ft_usleep(5, philo);
 	if (philo->meal_nb > 0)
 	{
-		while (1)
-		{
+		while (philo->meal_taken < philo->meal_nb)
 			if (!philos_routine(philo))
-				break ;
-			else if (philo->meal_taken == philo->meal_nb)
-			{
-				philo->params->meal_complete += 1;
-				break ;
-			}
+				return (NULL);
+		if (philo->meal_taken == philo->meal_nb)
+		{
+			pthread_mutex_lock(&philo->params->meal_complete_m);
+			philo->params->meal_complete += 1;
+			pthread_mutex_unlock(&philo->params->meal_complete_m);
 		}
 	}
 	else
 	{
 		while (1)
-		{
 			if (!philos_routine(philo))
 				break ;
-		}
 	}
 	return (NULL);
 }
-// a voir comment remonter l erreur si start dinner fail ? main wise
 
 bool	init_threads(t_philo_p *params, t_thread *philos)
 {

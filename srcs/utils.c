@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 17:22:16 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 18:00:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:28:28 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	*mini_calloc(size_t nmemb, size_t size)
 	return (allocated);
 }
 
-// void	print_params(t_thread *philos)
-// {
-// 	printf("Param 1 is %d this is number of philos\n", philos->nb_philo);
-// 	printf("Param 2 is %d this is death timer in ms\n", philos->d_timer);
-// 	printf("Param 3 is %d this is time spent to eat in ms\n", philos->e_timer);
-// 	printf("Param 4 is %d this is sleep time in ms\n", philos->s_timer);
-// 	if (philos->meal_nb != -1)
-// 		printf("Param 5 is %d this is meal needed\n", philos->meal_nb);
-// }
+void	print_params(t_thread *philos)
+{
+	printf("Param 1 is %d this is number of philos\n", philos->nb_philo);
+	printf("Param 2 is %d this is death timer in ms\n", philos->d_timer);
+	printf("Param 3 is %d this is time spent to eat in ms\n", philos->e_timer);
+	printf("Param 4 is %d this is sleep time in ms\n", philos->s_timer);
+	if (philos->meal_nb != -1)
+		printf("Param 5 is %d this is meal needed\n", philos->meal_nb);
+}

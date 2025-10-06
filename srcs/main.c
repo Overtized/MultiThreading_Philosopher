@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 18:00:54 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:28:46 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,15 @@ int	main(int ac, char *av[])
 	free_struct(params, philos);
 	return (0);
 }
-	//tester 3 599 100 100;
-	// to do corriger ce genre d output : 
-// ➜  philosopher git:(main) ✗ make && ./philo 2 100 50 51
-// make: Nothing to be done for 'all'.
-// 0 ms: 1 , has taken a fork
+// print_params(philos);
+/*sur des timings tres court et un nombre de philo impair, il y aura toujours un
+ philo qui ne mange pas et qui esseira de choper les fourchettes 
+ juste avant de mourir de faim, si ils sont pairs ils alternent
+les un apres les autres ce qui rend la simualtion plus stable.
+time to die et time to eat sont a surveiller de pres
+comme sur l'input:./philo 3 400 200 100 dies et && ./philo 3 410 200 100 live*/
 
-// 0 ms: 1 , is eating
-
-// 55 ms: 1 , is sleeping
-
-// 0 ms: 2 , has taken a fork
-
-// 55 ms: 2 , is eating
-
-// 55 ms: 1 , died
-// func de routine des philo 
-// func pour init les threads avec chaque phils
-
-// les args doivent etre passes sous forme d unisgned int sauf pour time to eat
-// et sleep en miliseconde (double ?)
-// les philo sont nommes et ranges de 1 a nb of philo et 
-// assis dans leurs ordre croissant 
+// les philo sont nommes et de 1 a nb of philo et assis dans ordre croissant 
 // tu dois representer des philosophers a l'aide de thread (pthread_create),
 // utiliser usleep pour les faire attendre que un autre thread finisse une tache
 // entre chaque philo tu as une fork (une a gauche une a droite 
@@ -94,13 +81,4 @@ side. If there is only one philosopher, they will have access to just one fork.
 •To prevent philosophers from duplicating forks,
 // you should protect each fork’s state
 with a mutex.
-
 */
-	// res = pthread_init();
-	// if (res == NULL)
-	// 	return (1);
-	// printf(" sum of mails %d\n", *res);
-	// free(res);
-	//launch philos
-	//freeall
-	// printf(" hello world\n");

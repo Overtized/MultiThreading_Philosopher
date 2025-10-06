@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 18:36:42 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 22:01:41 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,43 @@
 
 typedef struct s_philo_p
 {
-	pthread_mutex_t *forks;
-	pthread_mutex_t print;
-	pthread_mutex_t death;
-	bool	stop;
-	bool	someone_died;
-	int	meal_complete;
-	int	phil_name;
-	int	nb_philo;
-	int	d_timer;
-	int	e_timer;
-	int	s_timer;
-	int	meal_nb;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
+	pthread_mutex_t	death;
+	pthread_mutex_t	meal_complete_m;
+	bool			stop;
+	bool			someone_died;
+	int				meal_complete;
+	int				phil_name;
+	int				nb_philo;
+	int				d_timer;
+	int				e_timer;
+	int				s_timer;
+	int				meal_nb;
 }	t_philo_p;
 
 typedef struct s_thread
 {
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	last_meal;
 	pthread_t		t;
-	pthread_mutex_t *r_fork;
-	pthread_mutex_t *l_fork;
-	pthread_mutex_t last_meal;
-	t_philo_p	*params;
-	long	start_time;
-	bool	ready_to_eat;
-	bool	is_alive;
-	bool	state_change;
-	bool	stop;
-	int		elapsed_t;
-	long	last_meal_t;
-	int	nb_philo;
-	int	phil_name;
-	int	d_timer;
-	int	e_timer;
-	int	s_timer;
-	int	meal_nb;
-	int	meal_taken;
+	t_philo_p		*params;
+	long			start_time;
+	long			last_meal_t;
+	bool			ready_to_eat;
+	bool			is_alive;
+	bool			state_change;
+	bool			stop;
+	int				elapsed_t;
+	int				nb_philo;
+	int				phil_name;
+	int				d_timer;
+	int				e_timer;
+	int				s_timer;
+	int				meal_nb;
+	int				meal_taken;
 }	t_thread;
-
 
 void	*start_diner(void *params);
 bool	init_threads(t_philo_p *params, t_thread *philos);
@@ -86,9 +86,9 @@ void	print_params(t_thread *params);
 void	*check_thread_death(t_thread *philos);
 void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
-long	get_time_death(t_thread	*philo);
 long	get_time(void);
 void	*ft_usleep(long time_to_wait, t_thread *philo);
+
 //
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 18:04:11 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:53:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void	*init_philos(t_philo_p *params, t_thread *phil)
 	}
 	return ((void *) 1);
 }
-

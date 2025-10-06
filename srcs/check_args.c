@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 16:44:06 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:13:51 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static bool	init_m_tab(t_philo_p *params)
 	}
 	pthread_mutex_init(&params->death, NULL);
 	pthread_mutex_init(&params->print, NULL);
+	pthread_mutex_init(&params->meal_complete_m, NULL);
 	return (true);
 }
 
