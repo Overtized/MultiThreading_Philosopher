@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/04 16:19:49 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:21:57 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,20 @@ void	*is_eating(t_thread	*philo)
 
 	if (check_thread_death(philo) == NULL)
 		return(NULL);
-	take_fork(philo);
+	 if (take_fork(philo) == NULL)
+	 	return ((void*)1);
 	if (philo->ready_to_eat)
 	{
 		new_time = get_time();
 		if (new_time == -1)
 			return(putdown_fork(philo), NULL);
-		new_time = new_time - philo->start_time;
-		philo->elapsed_t = new_time;
+		philo->elapsed_t = new_time - philo->start_time;
+		pthread_mutex_lock(&philo->last_meal);
+		philo->last_meal_t = new_time;
+		pthread_mutex_unlock(&philo->last_meal);
 		print_message(philo, ", is eating\n");
 		if (ft_usleep(philo->e_timer) == NULL)
 		 	return(putdown_fork(philo), NULL);
-		pthread_mutex_lock(&philo->last_meal);
-		philo->last_meal_t = new_time; // atention a voir si pas de decalage tms
-		pthread_mutex_unlock(&philo->last_meal);
-		if (check_thread_death(philo) == NULL)
-			return(putdown_fork(philo), NULL);
 		philo->meal_taken += 1;
 	}
 	putdown_fork(philo);

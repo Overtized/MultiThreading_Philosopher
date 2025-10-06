@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/04 16:25:33 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:06:05 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char *av[])
 		return (printf("thread fail\n"), free_struct(params, philos), 1);
 	free_struct(params, philos);
 	return (0);
+	//tester 3 599 100 100;
 	// to do corriger ce genre d output : 
 // ➜  philosopher git:(main) ✗ make && ./philo 2 100 50 51
 // make: Nothing to be done for 'all'.

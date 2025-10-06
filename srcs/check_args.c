@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/04 15:59:25 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:44:06 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	test_int(char *av[])
 		return (printf ("wrong nb of philos\n"), false);
 	return (true);
 }
+
 static bool	init_m_tab(t_philo_p *params)
 {
 	int	i;
@@ -47,6 +48,7 @@ static bool	init_m_tab(t_philo_p *params)
 	pthread_mutex_init(&params->print, NULL);
 	return (true);
 }
+
 bool	fill_struct(t_philo_p *params, char *av[])
 {
 	params->nb_philo = mini_atoi(av[0]);

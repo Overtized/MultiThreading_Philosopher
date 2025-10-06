@@ -6,29 +6,30 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/04 16:24:15 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:47:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long	get_time()
+long	get_time(void)
 {
-	struct timeval now_t;
-	long	elapsed_time;
+	struct timeval	now_t;
+	long			elapsed_time;
 
 	if (gettimeofday(&now_t, NULL) == -1)
 		return (printf ("gettime failure\n"), -1);
-	elapsed_time = (now_t.tv_sec * 1000) + (now_t.tv_usec / 1000); // t since epoch in ms
+	elapsed_time = (now_t.tv_sec * 1000) + (now_t.tv_usec / 1000);
 	return (elapsed_time);
-
 }
+
+// t since epoch in ms
 void	*ft_usleep(long time_to_wait)
 {
-	long end_t;
+	long	end_t;
 
 	end_t = get_time() + time_to_wait;
 	while (get_time() < end_t)
 		usleep(500);
-	return((void *)1);
+	return ((void *)1);
 }

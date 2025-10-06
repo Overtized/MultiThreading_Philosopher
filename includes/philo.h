@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/04 15:55:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:24:34 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo_p
 	pthread_mutex_t death;
 	bool	stop;
 	bool	someone_died;
+	int	meal_complete;
 	int	phil_name;
 	int	nb_philo;
 	int	d_timer;
@@ -78,8 +79,7 @@ void	*init_philos(t_philo_p *params, t_thread *phil);
 void	*is_eating(t_thread	*philo);
 void	*is_sleeping(t_thread	*philo);
 void	*is_thinking(t_thread	*philo);
-void	*is_philo_dead(t_thread	*philo);
-void	take_fork(t_thread	*philo);
+void	*take_fork(t_thread	*philo);
 void	putdown_fork(t_thread	*philo);
 //
 void	print_params(t_thread *params);
