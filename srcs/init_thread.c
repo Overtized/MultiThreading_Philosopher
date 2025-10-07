@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 22:10:46 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 19:09:48 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static bool	philos_routine(t_thread	*philo)
 {
+	if (philo->phil_name % 2 == 0)
+		usleep(200);
 	if (is_eating(philo) == NULL)
 		return (false);
 	if (is_sleeping(philo) == NULL)
@@ -27,13 +29,13 @@ static void	death_msg(t_thread *philos, t_philo_p *params, int i)
 {
 	long	time;
 
+	pthread_mutex_lock(&philos->params->death);
 	time = get_time();
 	philos[i].elapsed_t = time - philos[i].start_time;
-	pthread_mutex_lock(&philos->params->death);
 	philos[i].is_alive = false;
 	params->stop = true;
 	pthread_mutex_unlock(&philos->params->death);
-	print_message(&philos[i], ", died\n");
+	print_message(&philos[i], "died\n");
 }
 
 void	*monitor(t_philo_p *params, t_thread *philos)
@@ -52,7 +54,7 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 			last_meal = philos[i].last_meal_t;
 			pthread_mutex_unlock(&philos[i].last_meal);
 			now = get_time() - philos[i].start_time;
-			if (now - last_meal > philos[i].d_timer)
+			if (now - last_meal >= philos[i].d_timer)
 				return (death_msg(philos, params, i), NULL);
 			i++;
 		}
@@ -70,8 +72,6 @@ void	*start_diner(void *params)
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
-	if (philo->phil_name % 2 == 0)
-		ft_usleep(5, philo);
 	if (philo->meal_nb > 0)
 	{
 		while (philo->meal_taken < philo->meal_nb)
@@ -87,8 +87,11 @@ void	*start_diner(void *params)
 	else
 	{
 		while (1)
+		{
 			if (!philos_routine(philo))
 				break ;
+			usleep(500);
+		}
 	}
 	return (NULL);
 }

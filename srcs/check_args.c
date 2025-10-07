@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 21:13:51 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 16:53:57 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static bool	init_m_tab(t_philo_p *params)
 		return (false);
 	while (i < params->nb_philo)
 	{
+		params->fork_clean = i;
 		if (pthread_mutex_init(&params->forks[i], NULL) != 0)
 			return (false);
 		i++;

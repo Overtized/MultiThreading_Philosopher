@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 22:01:41 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:00:06 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_philo_p
 	pthread_mutex_t	meal_complete_m;
 	bool			stop;
 	bool			someone_died;
+	int				fork_clean;
+	int				last_meal_clean;
 	int				meal_complete;
 	int				phil_name;
 	int				nb_philo;
@@ -88,6 +90,7 @@ void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time(void);
 void	*ft_usleep(long time_to_wait, t_thread *philo);
+void	update_elasped_time(t_thread	*philo);
 
 //
 

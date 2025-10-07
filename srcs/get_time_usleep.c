@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 21:24:04 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:00:58 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ void	*ft_usleep(long time_to_wait, t_thread *philo)
 		usleep(500);
 	}
 	return ((void *) 1);
+}
+void	update_elasped_time(t_thread	*philo)
+{
+	long	new_time;
+
+	new_time = get_time();
+	if (new_time == -1)
+		return ;
+	philo->elapsed_t = new_time - philo->start_time;
 }
