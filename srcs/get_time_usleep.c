@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 17:00:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 21:14:45 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	update_elasped_time(t_thread	*philo)
 	new_time = get_time();
 	if (new_time == -1)
 		return ;
+	pthread_mutex_lock(&philo->elapsed_m);
 	philo->elapsed_t = new_time - philo->start_time;
+	pthread_mutex_unlock(&philo->elapsed_m);
 }

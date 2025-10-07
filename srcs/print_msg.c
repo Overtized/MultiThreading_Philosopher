@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:45:53 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 19:04:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/07 21:11:26 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_message(t_thread *philos, const char *msg)
 {
 	pthread_mutex_lock(&philos->params->print);
 	pthread_mutex_lock(&philos->params->death);
+	pthread_mutex_lock(&philos->elapsed_m);
 	if (philos->params->someone_died == false)
 	{
 		if (philos->is_alive == true)
@@ -26,6 +27,7 @@ void	print_message(t_thread *philos, const char *msg)
 			philos->params->someone_died = true;
 		}
 	}
+	pthread_mutex_unlock(&philos->elapsed_m);
 	pthread_mutex_unlock(&philos->params->print);
 	pthread_mutex_unlock(&philos->params->death);
 	return ;
