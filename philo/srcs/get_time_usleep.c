@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 17:44:05 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:22:33 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	update_elasped_time(t_thread	*philo)
 	pthread_mutex_unlock(&philo->elapsed_m);
 	return (true);
 }
+
 bool	update_e_time_last_meal(t_thread	*philo)
 {
 	long	new_time;
@@ -64,4 +65,3 @@ bool	update_e_time_last_meal(t_thread	*philo)
 	pthread_mutex_unlock(&philo->elapsed_m);
 	return (true);
 }
-

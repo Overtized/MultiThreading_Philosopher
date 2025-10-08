@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 18:13:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 18:42:46 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:22:57 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static bool	tasks(t_thread	*philo)
 		return (false);
 	return (true);
 }
+
 bool	philos_routine(t_thread	*philo)
 {
 	long	meal_taken;
@@ -45,4 +46,3 @@ bool	philos_routine(t_thread	*philo)
 	}
 	return (true);
 }
-

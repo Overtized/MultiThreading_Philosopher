@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 19:20:47 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:22:12 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ typedef struct s_thread
 	pthread_mutex_t	meal_taken_m;
 	pthread_t		t;
 	t_philo_p		*params;
-	long			start_time;
-	long			last_meal_t;
 	bool			is_alive;
 	bool			state_change;
 	bool			stop;
+	long			start_time;
+	long			last_meal_t;
 	int				elapsed_t;
 	int				nb_philo;
 	int				phil_name;
@@ -114,7 +114,5 @@ bool	is_overflow(const char *str);
 int		mini_atoi(const char *str);
 void	*mini_calloc(size_t nmemb, size_t size);
 void	print_params(t_thread *params);
-//
-
 
 #endif
