@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:30:56 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:55:29 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	main(int ac, char *av[])
 	return (0);
 }
 // push dans un repo philo
-// gerer : ./philo 4 399 200 200
-// 200 410 200 200
 // print_params(philos);
 /*sur des timings tres court et un nombre de philo impair, il y aura toujours un
  philo qui ne mange pas et qui esseira de choper les fourchettes 

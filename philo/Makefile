@@ -42,7 +42,8 @@ BONUS_DIR = bonus
 SRC = $(addprefix $(SRC_DIR)/, main.c check_args.c utils.c fork_init.c \
 								init_philos.c init_thread.c philos_func.c \
 								free_struct.c get_time_usleep.c print_msg.c \
-								 mutexes_check.c mutexes_check2.c)
+								 mutexes_check.c mutexes_check2.c \
+								 philo_routine.c)
 SHARED = $(addprefix $(SHARED_DIR)/, )
 BONUS_SRC = $(addprefix $(BONUS_DIR)/, )
 # **************************************************************************** #

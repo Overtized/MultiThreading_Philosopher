@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 15:46:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:45:22 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ bool	check_args(t_philo_p *params, int ac, char *av[])
 		return (printf ("fill struct failed\n"), false);
 	return (true);
 }
-// check les arguments pour verifier leurs validité et les ranger dans une struc

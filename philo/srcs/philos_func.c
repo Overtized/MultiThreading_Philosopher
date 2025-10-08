@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:38:03 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:41:52 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,51 @@
 
 bool	is_eating(t_thread	*philo)
 {
-	long	new_time;
-
 	if (!take_fork(philo))
 		return (true);
-	if (!check_thread_death(philo))
-		return (putdown_fork(philo), false);
-	if (philo->ready_to_eat)
+	if (!update_e_time_last_meal(philo))
 	{
-		new_time = get_time();
-		if (new_time == -1)
-			return (putdown_fork(philo), false);
-		pthread_mutex_lock(&philo->last_meal);
-		pthread_mutex_lock(&philo->elapsed_m);
-		philo->elapsed_t = new_time - philo->start_time;
-		philo->last_meal_t = new_time - philo->start_time;
-		pthread_mutex_unlock(&philo->last_meal);
-		pthread_mutex_unlock(&philo->elapsed_m);
-		print_message(philo, "is eating\n");
-		if (!ft_usleep(philo->e_timer, philo))
-			return (putdown_fork(philo), false);
-		increase_meal_taken(philo);
+		putdown_fork(philo);
+		return (false);
 	}
+	print_message(philo, "is eating\n");
+	if (!check_thread_death(philo))
+	{
+		putdown_fork(philo);
+		return (false);
+	}
+	if (!ft_usleep(philo->e_timer, philo))
+	{
+		putdown_fork(philo);
+		return (false);
+	}
+	increase_meal_taken(philo);
 	putdown_fork(philo);
 	return (true);
 }
 
 bool	is_thinking(t_thread	*philo)
 {
-	update_elasped_time(philo);
+	long	time_to_think;
+
+	time_to_think = philo->d_timer - philo->e_timer - philo->s_timer;
+	if (!update_elasped_time(philo))
+		return (false);
 	if (!check_thread_death(philo))
 		return (false);
 	if (philo->state_change == 1)
 	{
+		ft_usleep((time_to_think * 0.8), philo);
 		print_message(philo, "is thinking\n");
 		philo->state_change = 0;
-		if (!check_thread_death(philo))
-			return (false);
 	}
 	return (true);
 }
 
 bool	is_sleeping(t_thread	*philo)
 {
-	update_elasped_time(philo);
+	if (!update_elasped_time(philo))
+		return (false);
 	if (!check_thread_death(philo))
 		return (false);
 	if (philo->meal_taken > 0)

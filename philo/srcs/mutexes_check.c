@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 20:25:43 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:33:08 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:42:34 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	meal_complete_mutex(t_thread *philo)
 	pthread_mutex_lock(&philo->params->meal_complete_m);
 	philo->params->meal_complete += 1;
 	pthread_mutex_unlock(&philo->params->meal_complete_m);
+}
+
+void	meal_taken_mutex(t_thread *philo, long *meal_taken)
+{
+	pthread_mutex_lock(&philo->meal_taken_m);
+	*meal_taken = philo->meal_taken;
+	pthread_mutex_unlock(&philo->meal_taken_m);
 }
 
 bool	check_meal_complete(t_philo_p *params)
@@ -39,17 +46,16 @@ void	increase_meal_taken(t_thread *philo)
 
 void	*meal_is_set_case(t_thread *philo)
 {
-	while (philo->meal_taken < philo->meal_nb)
+	while (1)
 	{
 		if (!philos_routine(philo))
-		{
 			return (NULL);
-		}
 		if (philo->meal_taken == philo->meal_nb)
 		{
 			meal_complete_mutex(philo);
 			return ((void *) 1);
 		}
+		usleep(500);
 	}
 	return ((void *) 1);
 }

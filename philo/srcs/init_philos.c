@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 15:47:52 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:03:37 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	*load_params(t_philo_p *params, t_thread *phil, int i)
 	phil->last_meal_t = 0;
 	phil->meal_taken = 0;
 	phil->elapsed_t = 0;
-	phil->ready_to_eat = false;
 	phil->is_alive = true;
 	phil->state_change = true;
 	phil->stop = params->stop;

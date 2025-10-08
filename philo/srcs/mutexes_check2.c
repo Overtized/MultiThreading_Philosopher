@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:04:22 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:33:21 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:54:39 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	wait_all_thread_m(t_thread *philo)
 		pthread_mutex_unlock(&philo->params->p_start_m);
 		if (current == philo->nb_philo)
 			return ;
-		usleep(1000);
+		usleep(2000);
 	}
 	return ;
 }
@@ -57,13 +57,15 @@ bool	wait_all_thread_c(t_thread *philo)
 	{
 		pthread_mutex_lock(&philo->params->p_start_m);
 		current = philo->params->p_start;
-		stopped = philo->params->stop;
 		pthread_mutex_unlock(&philo->params->p_start_m);
+		pthread_mutex_lock(&philo->params->death);
+		stopped = philo->params->stop;
+		pthread_mutex_unlock(&philo->params->death);
 		if (current == philo->nb_philo)
 			return (true);
 		if (stopped)
 			return (false);
-		usleep(1000);
+		usleep(2000);
 	}
 	return (true);
 }

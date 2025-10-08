@@ -6,24 +6,11 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:29:59 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:17:18 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-bool	philos_routine(t_thread	*philo)
-{
-	if (!check_thread_death(philo))
-		return (false);
-	if (!is_eating(philo))
-		return (false);
-	if (!is_sleeping(philo))
-		return (false);
-	if (!is_thinking(philo))
-		return (false);
-	return (true);
-}
 
 static void	death_msg(t_thread *philos, t_philo_p *params, int i)
 {
@@ -64,7 +51,7 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 		}
 		if (check_meal_complete(params))
 			return (NULL);
-		usleep(10000);
+		usleep(1000);
 	}
 	return (NULL);
 }
@@ -77,7 +64,7 @@ void	*start_diner(void *params)
 	if (!wait_all_thread_c(philo))
 		return (NULL);
 	if (philo->phil_name % 2 == 0)
-		usleep(500);
+		usleep((philo->e_timer * 1000) / 2);
 	if (philo->meal_nb > 0)
 	{
 		if (meal_is_set_case(philo) == NULL)
