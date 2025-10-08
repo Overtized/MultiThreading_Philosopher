@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 14:11:51 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:38:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	is_eating(t_thread	*philo)
 		pthread_mutex_lock(&philo->last_meal);
 		pthread_mutex_lock(&philo->elapsed_m);
 		philo->elapsed_t = new_time - philo->start_time;
-		philo->last_meal_t = new_time -philo->start_time;
+		philo->last_meal_t = new_time - philo->start_time;
 		pthread_mutex_unlock(&philo->last_meal);
 		pthread_mutex_unlock(&philo->elapsed_m);
 		print_message(philo, "is eating\n");
@@ -47,15 +47,14 @@ bool	is_thinking(t_thread	*philo)
 		return (false);
 	if (philo->state_change == 1)
 	{
-		// usleep(500);
 		print_message(philo, "is thinking\n");
 		philo->state_change = 0;
 		if (!check_thread_death(philo))
-		return (false);
+			return (false);
 	}
 	return (true);
 }
-// a voir si je le laisse le usleep
+
 bool	is_sleeping(t_thread	*philo)
 {
 	update_elasped_time(philo);

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 15:10:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:40:00 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philo_p
 	pthread_mutex_t	print;
 	pthread_mutex_t	death;
 	pthread_mutex_t	meal_complete_m;
+	pthread_mutex_t	p_start_m;
 	bool			stop;
 	bool			someone_died;
 	int				fork_clean;
@@ -96,10 +97,11 @@ void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time(void);
 bool	ft_usleep(long time_to_wait, t_thread *philo);
 void	update_elasped_time(t_thread	*philo);
-void 	meal_complete_mutex(t_thread	*philo);
+void	meal_complete_mutex(t_thread	*philo);
 bool	check_meal_complete(t_philo_p *params);
 void	increase_meal_taken(t_thread *philo);
-bool	wait_all_thread(t_thread *philo);
+bool	wait_all_thread_c(t_thread *philo);
+void	wait_all_thread_m(t_thread *philo);
 void	*meal_is_set_case(t_thread *philo);
 bool	philos_routine(t_thread	*philo);
 bool	check_philo_done(t_philo_p *params, t_thread *philos, int *i);

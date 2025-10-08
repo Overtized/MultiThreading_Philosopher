@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:45:53 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 13:41:28 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:39:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_message(t_thread *philos, const char *msg)
 bool	check_thread_death(t_thread *philos)
 {
 	pthread_mutex_lock(&philos->params->death);
-	if (philos->is_alive == false || philos->params->stop == true) // a voir si tu peux pas le tej le philo is alive 
+	if (philos->is_alive == false || philos->params->stop == true)
 	{
 		pthread_mutex_unlock(&philos->params->death);
 		return (false);
@@ -44,3 +44,4 @@ bool	check_thread_death(t_thread *philos)
 	pthread_mutex_unlock(&philos->params->death);
 	return (true);
 }
+// a voir si tu peux pas le tej le philo is alive 

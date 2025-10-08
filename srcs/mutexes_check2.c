@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:04:22 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 15:16:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:33:21 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,44 @@ bool	check_philo_done(t_philo_p *params, t_thread *philos, int *i)
 	}
 	pthread_mutex_unlock(&params->meal_complete_m);
 	return (false);
+}
+
+void	wait_all_thread_m(t_thread *philo)
+{
+	int	current;
+
+	current = 0;
+	while (1)
+	{
+		pthread_mutex_lock(&philo->params->p_start_m);
+		current = philo->params->p_start;
+		pthread_mutex_unlock(&philo->params->p_start_m);
+		if (current == philo->nb_philo)
+			return ;
+		usleep(1000);
+	}
+	return ;
+}
+
+bool	wait_all_thread_c(t_thread *philo)
+{
+	int		current;
+	bool	stopped;
+
+	pthread_mutex_lock(&philo->params->p_start_m);
+	philo->params->p_start += 1;
+	pthread_mutex_unlock(&philo->params->p_start_m);
+	while (1)
+	{
+		pthread_mutex_lock(&philo->params->p_start_m);
+		current = philo->params->p_start;
+		stopped = philo->params->stop;
+		pthread_mutex_unlock(&philo->params->p_start_m);
+		if (current == philo->nb_philo)
+			return (true);
+		if (stopped)
+			return (false);
+		usleep(1000);
+	}
+	return (true);
 }

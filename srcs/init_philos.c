@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 14:34:27 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:47:52 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*init_philos(t_philo_p *params, t_thread *phil)
 	{
 		params->last_meal_clean = i;
 		params->elapsed_m_clean = i;
+		params->meal_taken_clean = i;
 		if (load_params(params, &phil[i], i) == NULL)
 			return (NULL);
 		i++;

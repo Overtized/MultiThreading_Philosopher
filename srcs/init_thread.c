@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 15:14:32 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:29:59 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 		while (i < params->nb_philo)
 		{
 			if (check_philo_done(params, philos, &i))
-				continue;
+				continue ;
 			pthread_mutex_lock(&philos[i].last_meal);
 			last_meal = philos[i].last_meal_t;
 			pthread_mutex_unlock(&philos[i].last_meal);
@@ -74,9 +74,8 @@ void	*start_diner(void *params)
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
-	// philo->params->p_start += 1;
-	// if (!wait_all_thread(philo))
-	// 	return (NULL);
+	if (!wait_all_thread_c(philo))
+		return (NULL);
 	if (philo->phil_name % 2 == 0)
 		usleep(500);
 	if (philo->meal_nb > 0)
@@ -84,7 +83,7 @@ void	*start_diner(void *params)
 		if (meal_is_set_case(philo) == NULL)
 			return (NULL);
 		else
-			return ( (void *) 1);
+			return ((void *) 1);
 	}
 	else
 	{
@@ -109,6 +108,7 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 			return (perror("thread create fail\n"), false);
 		i++;
 	}
+	wait_all_thread_m(philos);
 	monitor(params, philos);
 	i = 0;
 	while (i < params->nb_philo)

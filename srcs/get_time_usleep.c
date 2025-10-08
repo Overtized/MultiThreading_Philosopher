@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 13:45:23 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:09:04 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	ft_usleep(long time_to_wait, t_thread *philo)
 	}
 	return (true);
 }
+
 void	update_elasped_time(t_thread	*philo)
 {
 	long	new_time;
