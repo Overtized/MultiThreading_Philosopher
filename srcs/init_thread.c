@@ -6,21 +6,21 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 21:57:17 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:14:32 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static bool	philos_routine(t_thread	*philo)
+bool	philos_routine(t_thread	*philo)
 {
-	if (check_thread_death(philo) == NULL)
-		return (NULL);
-	if (is_eating(philo) == NULL)
+	if (!check_thread_death(philo))
 		return (false);
-	if (is_sleeping(philo) == NULL)
+	if (!is_eating(philo))
 		return (false);
-	if (is_thinking(philo) == NULL)
+	if (!is_sleeping(philo))
+		return (false);
+	if (!is_thinking(philo))
 		return (false);
 	return (true);
 }
@@ -52,10 +52,8 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 		i = 0;
 		while (i < params->nb_philo)
 		{
-			pthread_mutex_lock(&params->meal_complete_m);
-			if (philos[i].meal_taken == philos[i].meal_nb)
-				i++;
-			pthread_mutex_unlock(&params->meal_complete_m);
+			if (check_philo_done(params, philos, &i))
+				continue;
 			pthread_mutex_lock(&philos[i].last_meal);
 			last_meal = philos[i].last_meal_t;
 			pthread_mutex_unlock(&philos[i].last_meal);
@@ -64,9 +62,9 @@ void	*monitor(t_philo_p *params, t_thread *philos)
 				return (death_msg(philos, params, i), NULL);
 			i++;
 		}
-		usleep(1000);
 		if (check_meal_complete(params))
 			return (NULL);
+		usleep(10000);
 	}
 	return (NULL);
 }
@@ -76,26 +74,28 @@ void	*start_diner(void *params)
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
+	// philo->params->p_start += 1;
+	// if (!wait_all_thread(philo))
+	// 	return (NULL);
 	if (philo->phil_name % 2 == 0)
 		usleep(500);
 	if (philo->meal_nb > 0)
 	{
-		while (philo->meal_taken < philo->meal_nb)
-			if (!philos_routine(philo))
-				return (NULL);
-		if (philo->meal_taken == philo->meal_nb)
-			return (meal_complete_mutex(philo), NULL);
+		if (meal_is_set_case(philo) == NULL)
+			return (NULL);
+		else
+			return ( (void *) 1);
 	}
 	else
 	{
 		while (1)
 		{
 			if (!philos_routine(philo))
-				break ;
+				return (NULL);
 			usleep(500);
 		}
 	}
-	return (NULL);
+	return ((void *) 1);
 }
 
 bool	init_threads(t_philo_p *params, t_thread *philos)

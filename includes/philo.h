@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 21:37:30 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:10:30 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo_p
 	int				elapsed_m_clean;
 	int				meal_complete;
 	int				phil_name;
+	int				p_start;
 	int				nb_philo;
 	int				d_timer;
 	int				e_timer;
@@ -82,23 +83,26 @@ void	*mini_calloc(size_t nmemb, size_t size);
 bool	fill_struct(t_philo_p *params, char *av[]);
 void	*init_philos(t_philo_p *params, t_thread *phil);
 //
-void	*is_eating(t_thread	*philo);
-void	*is_sleeping(t_thread	*philo);
-void	*is_thinking(t_thread	*philo);
-void	*take_fork(t_thread	*philo);
+bool	is_eating(t_thread	*philo);
+bool	is_sleeping(t_thread	*philo);
+bool	is_thinking(t_thread	*philo);
+bool	take_fork(t_thread	*philo);
 void	putdown_fork(t_thread	*philo);
 //
 void	print_params(t_thread *params);
-void	*check_thread_death(t_thread *philos);
+bool	check_thread_death(t_thread *philos);
 void	print_message(t_thread *philos, const char *msg);
 void	free_struct(t_philo_p *params, t_thread	*philos);
 long	get_time(void);
-void	*ft_usleep(long time_to_wait, t_thread *philo);
+bool	ft_usleep(long time_to_wait, t_thread *philo);
 void	update_elasped_time(t_thread	*philo);
 void 	meal_complete_mutex(t_thread	*philo);
 bool	check_meal_complete(t_philo_p *params);
 void	increase_meal_taken(t_thread *philo);
-
+bool	wait_all_thread(t_thread *philo);
+void	*meal_is_set_case(t_thread *philo);
+bool	philos_routine(t_thread	*philo);
+bool	check_philo_done(t_philo_p *params, t_thread *philos, int *i);
 
 //
 

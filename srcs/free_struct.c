@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:00:42 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 21:32:36 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:39:53 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	free_struct(t_philo_p *params, t_thread	*philos)
 			pthread_mutex_destroy(&philos[i].elapsed_m);
 			i++;
 		}
+		// la meme pour meal taken m
 		free_trash(params, philos);
 	}
 }

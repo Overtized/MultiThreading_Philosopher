@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 16:53:57 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:52:01 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 bool	test_int(char *av[])
 {
 	int	i;
+	int	nb_phil;
 
 	i = 0;
+	nb_phil = mini_atoi(av[0]);
+	if (nb_phil == 0 || nb_phil > 200)
+		return (printf ("wrong nb of philos\n"), false);
 	while (av[i])
 	{
 		if (!is_not_int(av[i]))
@@ -25,8 +29,6 @@ bool	test_int(char *av[])
 			return (false);
 		i++;
 	}
-	if (av[0][0] == '0')
-		return (printf ("wrong nb of philos\n"), false);
 	return (true);
 }
 
@@ -45,9 +47,12 @@ static bool	init_m_tab(t_philo_p *params)
 			return (false);
 		i++;
 	}
-	pthread_mutex_init(&params->death, NULL);
-	pthread_mutex_init(&params->print, NULL);
-	pthread_mutex_init(&params->meal_complete_m, NULL);
+	if (pthread_mutex_init(&params->death, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&params->print, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&params->meal_complete_m, NULL) != 0)
+		return (false);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 21:32:31 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:34:27 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	*load_params(t_philo_p *params, t_thread *phil, int i)
 	if (pthread_mutex_init(&phil->last_meal, NULL) != 0)
 		return (NULL);
 	if (pthread_mutex_init(&phil->elapsed_m, NULL) != 0)
+		return (NULL);
+	if (pthread_mutex_init(&phil->meal_taken_m, NULL) != 0)
 		return (NULL);
 	phil->params = params;
 	return ((void *) 1);

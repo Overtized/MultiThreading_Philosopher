@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 18:57:19 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/07 19:06:44 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:48:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	one_phil(t_thread	*philo)
 	return ;
 }
 
-void	*take_fork(t_thread	*philo)
+bool	take_fork(t_thread	*philo)
 {
 	if (philo->nb_philo == 1)
 	{
 		one_phil(philo);
-		return (NULL);
+		return (false);
 	}
 	if (philo->phil_name % 2 == 0)
 	{
@@ -47,7 +47,7 @@ void	*take_fork(t_thread	*philo)
 		print_message(philo, "has taken a fork\n");
 		philo->state_change = true;
 	}
-	return ((void *)1);
+	return (true);
 }
 
 void	putdown_fork(t_thread	*philo)
