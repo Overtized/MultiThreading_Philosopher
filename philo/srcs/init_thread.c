@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 18:17:18 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:56:50 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,12 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 	while (i < params->nb_philo)
 	{
 		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0)
-			return (perror("thread create fail\n"), false);
+		{
+			params->stop = true;
+			params->thread_fail_nb = i;
+			perror("thread create fail\n");
+			return (false);
+		}
 		i++;
 	}
 	wait_all_thread_m(philos);

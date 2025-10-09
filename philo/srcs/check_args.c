@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/09 13:28:03 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:54:58 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 	if (!init_m_tab(params))
 		return (false);
 	params->stop = false;
+	params->thread_fail_nb = 0;
 	return (true);
 }
 

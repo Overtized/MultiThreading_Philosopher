@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:58:54 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 19:24:10 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:58:07 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo_p
 	int				e_timer;
 	int				s_timer;
 	int				meal_nb;
+	int				thread_fail_nb;
 }	t_philo_p;
 
 typedef struct s_thread
