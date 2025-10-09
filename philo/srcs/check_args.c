@@ -6,7 +6,7 @@
 /*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 19:22:45 by mchanlia         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:28:03 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	test_int(char *av[])
 
 	i = 0;
 	nb_phil = mini_atoi(av[0]);
-	if (nb_phil == 0 || nb_phil > 200)
+	if (nb_phil == 0 || nb_phil > 400)
 		return (printf ("wrong nb of philos\n"), false);
 	while (av[i])
 	{
