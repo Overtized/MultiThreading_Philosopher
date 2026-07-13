@@ -1,5 +1,7 @@
 # *This project has been created as part of the 42 curriculum by mchanlia*
 
+![Philosopher](philosopher.png)
+
 # **Program Name** : ['MultiThreading_Philosopher']
 
 ### **Short Description** : 
