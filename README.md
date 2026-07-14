@@ -32,13 +32,12 @@ Philosophers is a project that dives into the complex world of concurrent progra
 
 In a multithreaded environment, multiple sequences of instructions (threads) execute simultaneously within the same process, sharing the same memory space. This shared memory is a double-edged sword: it allows for fast communication between threads but introduces the risk of data races and deadlocks if two threads try to modify the same resource at the exact same time. To prevent this, we use mutexes (Mutual Exclusions) as locks to protect shared data.
 
-You will interact with fundamental concurrent programming concepts such as:
+I interacted with fundamental concurrent programming concepts such as:
 
 - POSIX Threads (pthread)
 - Mutexes
 - Data Races
-- Readlocks
-- Context  
+- Deadlocks
   
 Apart from mastering the pthread library, a massive part of this project involves optimizing time complexity. The program requires extreme precision using gettimeofday and custom usleep implementations to ensure philosophers don't inadvertently die due to CPU scheduling delays or inefficient looping.
 
@@ -55,7 +54,8 @@ This project emphasizes the understanding of:
 - Identifying, debugging, and preventing race conditions in complex memory environments.
 
 ### **Project Summary** :
-The program simulates a round table where $N$ philosophers sit, with $N$ forks placed between them. Each philosopher is a separate thread, and each fork is protected by a mutex lock. A philosopher must acquire two forks (the one on their left and right) to eat. The simulation meticulously logs every state change (taking a fork, eating, sleeping, thinking, or dying) with strict chronological timestamps. The goal is to design an algorithm that allows them to survive as long as possible without starving or deadlocking the simulation.  
+
+The program simulates a round table where N philosophers sit, with N forks placed between them. Each philosopher is a separate thread, and each fork is protected by a mutex lock. A philosopher must acquire two forks (the one on their left and right) to eat. The simulation meticulously logs every state change (taking a fork, eating, sleeping, thinking, or dying) with strict chronological timestamps. The goal is to design an algorithm that allows them to survive as long as possible without starving or deadlocking the simulation.  
 
 
 ### **Project Features** :
