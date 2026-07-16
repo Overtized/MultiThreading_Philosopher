@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:56:57 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:55:29 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:22:30 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int	main(int ac, char *av[])
 	t_thread	*philos;
 
 	philos = NULL;
-	params = mini_calloc(1, sizeof(t_philo_p));
+	params = mini_calloc(1, sizeof(t_philo_p)); // allocation of a basic philo datastructure to store program parameter
 	if (params == NULL)
 		return (printf("calloc fail\n"), 1);
-	if (!check_args(params, ac, av))
+	if (!check_args(params, ac, av)) // arg check
 		return (free_struct(params, philos), 1);
-	philos = mini_calloc(params->nb_philo, sizeof(t_thread));
+	philos = mini_calloc(params->nb_philo, sizeof(t_thread)); // allocation of a thread array representing the number of philos (thread of the program)
 	if (philos == NULL)
 		return (printf("calloc fail\n"), free_struct(params, philos), 1);
-	if (init_philos(params, philos) == NULL)
+	if (init_philos(params, philos) == NULL) // init of philos data struct
 		return (free_struct(params, philos), 1);
 	if (!init_threads(params, philos))
 		return (printf("thread fail\n"), free_struct(params, philos), 1);

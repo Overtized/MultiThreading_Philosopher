@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutexes_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:04:22 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 16:54:39 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:23:36 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	wait_all_thread_m(t_thread *philo)
 	current = 0;
 	while (1)
 	{
-		pthread_mutex_lock(&philo->params->p_start_m);
+		pthread_mutex_lock(&philo->params->p_start_m); // check for each thread for bool ready to start
 		current = philo->params->p_start;
 		pthread_mutex_unlock(&philo->params->p_start_m);
 		if (current == philo->nb_philo)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 18:10:10 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 18:03:37 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:22:19 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*init_philos(t_philo_p *params, t_thread *phil)
 		params->last_meal_clean = i;
 		params->elapsed_m_clean = i;
 		params->meal_taken_clean = i;
-		if (load_params(params, &phil[i], i) == NULL)
+		if (load_params(params, &phil[i], i) == NULL) // fill of the philo datastruct + mutexes init
 			return (NULL);
 		i++;
 	}

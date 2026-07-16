@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philos_func.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 13:28:36 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 18:41:52 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:35:31 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_eating(t_thread	*philo)
 {
 	if (!take_fork(philo))
 		return (true);
-	if (!update_e_time_last_meal(philo))
+	if (!update_e_time_last_meal(philo)) // time update as soon as possible 
 	{
 		putdown_fork(philo);
 		return (false);
@@ -57,7 +57,7 @@ bool	is_thinking(t_thread	*philo)
 
 bool	is_sleeping(t_thread	*philo)
 {
-	if (!update_elasped_time(philo))
+	if (!update_elasped_time(philo)) // timer update
 		return (false);
 	if (!check_thread_death(philo))
 		return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:35:00 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/09 13:54:58 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:19:47 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	fill_struct(t_philo_p *params, char *av[])
 	else
 		params->meal_nb = -1;
 	params->phil_name = -1;
-	if (!init_m_tab(params))
+	if (!init_m_tab(params)) // init of all the mutexes of the program
 		return (false);
 	params->stop = false;
 	params->thread_fail_nb = 0;
@@ -79,10 +79,10 @@ bool	fill_struct(t_philo_p *params, char *av[])
 bool	check_args(t_philo_p *params, int ac, char *av[])
 {
 	if (ac < 5 || ac > 6)
-		return (printf(" Wrong args number, should be at least 5\n"), false);
-	if (!test_int(&av[1]))
+		return (printf(" Wrong args number, should be at least 5\n"), false); // basic ac check
+	if (!test_int(&av[1])) // check for too big of an int (overflow)
 		return (printf("invalid arguments\n"), false);
-	if (!fill_struct(params, &av[1]))
+	if (!fill_struct(params, &av[1])) // fill param struct and init mutexes
 		return (printf ("fill struct failed\n"), false);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 18:57:19 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 17:37:35 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:35:08 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ bool	take_fork(t_thread	*philo)
 {
 	if (philo->nb_philo == 1)
 	{
-		one_phil(philo);
+		one_phil(philo); // until death
 		return (false);
 	}
-	if (philo->phil_name % 2 == 0)
+	if (philo->phil_name % 2 == 0) // basic handling of even / odd philos fork picking
 	{
 		pthread_mutex_lock(philo->l_fork);
 		pthread_mutex_lock(philo->r_fork);
@@ -48,15 +48,15 @@ bool	take_fork(t_thread	*philo)
 
 void	putdown_fork(t_thread	*philo)
 {
-	if (philo->phil_name % 2 == 0)
+	if (philo->phil_name % 2 == 0) // even phil
 	{
-		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->l_fork); // order of the fork put down is crucial
 		if (philo->nb_philo > 1)
 			pthread_mutex_unlock(philo->r_fork);
 	}
 	else
 	{
-		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->r_fork); // notice diff
 		if (philo->nb_philo > 1)
 			pthread_mutex_unlock(philo->l_fork);
 	}

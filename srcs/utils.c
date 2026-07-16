@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 17:22:16 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/06 21:28:28 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:17:07 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	*mini_calloc(size_t nmemb, size_t size)
 	size_t	n;
 
 	i = 0;
-	if (nmemb == 0 || size == 0 || nmemb > ULONG_MAX / size)
+	if (nmemb == 0 || size == 0 || nmemb > ULONG_MAX / size) // basic size safeguards
 		return (NULL);
-	if (nmemb * size > __SIZE_MAX__)
+	if (nmemb * size > __SIZE_MAX__) // basic size safeguards
 		return (NULL);
 	n = nmemb * size;
-	allocated = malloc (nmemb * size);
+	allocated = malloc (nmemb * size); // malloc
 	if (!allocated)
 		return (NULL);
-	while (i < n)
+	while (i < n) // basic bzero
 	{
 		((unsigned char *) allocated)[i] = '\0';
 		i++;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_time_usleep.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:17:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 19:22:33 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:35:59 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long	get_time(void)
+long	get_time(void) // basic get time functionning
 {
 	struct timeval	now_t;
 	long			elapsed_time;

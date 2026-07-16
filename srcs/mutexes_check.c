@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutexes_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 20:25:43 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 18:42:34 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:30:00 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	meal_complete_mutex(t_thread *philo)
 {
-	pthread_mutex_lock(&philo->params->meal_complete_m);
+	pthread_mutex_lock(&philo->params->meal_complete_m); // gloabl meal count mutex 
 	philo->params->meal_complete += 1;
 	pthread_mutex_unlock(&philo->params->meal_complete_m);
 }
@@ -50,7 +50,7 @@ void	*meal_is_set_case(t_thread *philo)
 	{
 		if (!philos_routine(philo))
 			return (NULL);
-		if (philo->meal_taken == philo->meal_nb)
+		if (philo->meal_taken == philo->meal_nb) // philo x has finished
 		{
 			meal_complete_mutex(philo);
 			return ((void *) 1);

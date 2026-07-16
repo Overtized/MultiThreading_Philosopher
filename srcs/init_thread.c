@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 16:56:34 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/09 13:56:50 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:28:47 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	*start_diner(void *params)
 	t_thread	*philo;
 
 	philo = (t_thread *) params;
-	if (!wait_all_thread_c(philo))
+	if (!wait_all_thread_c(philo)) // wait 
 		return (NULL);
-	if (philo->phil_name % 2 == 0)
+	if (philo->phil_name % 2 == 0) // small odd philo startup delay for fork conflict
 		usleep((philo->e_timer * 1000) / 2);
 	if (philo->meal_nb > 0)
 	{
-		if (meal_is_set_case(philo) == NULL)
+		if (meal_is_set_case(philo) == NULL) // last param situation
 			return (NULL);
 		else
 			return ((void *) 1);
@@ -91,17 +91,17 @@ bool	init_threads(t_philo_p *params, t_thread *philos)
 	i = 0;
 	while (i < params->nb_philo)
 	{
-		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0)
+		if (pthread_create(&philos[i].t, NULL, &start_diner, &philos[i]) != 0) // thread creation and simulation start
 		{
-			params->stop = true;
-			params->thread_fail_nb = i;
+			params->stop = true; // stop program
+			params->thread_fail_nb = i; // store fail index for clean handling
 			perror("thread create fail\n");
 			return (false);
 		}
 		i++;
 	}
-	wait_all_thread_m(philos);
-	monitor(params, philos);
+	wait_all_thread_m(philos); // wait
+	monitor(params, philos); // check for task completion
 	i = 0;
 	while (i < params->nb_philo)
 	{

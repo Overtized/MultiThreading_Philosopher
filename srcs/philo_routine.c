@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchanlia <mchanlia@42.student.fr>          +#+  +:+       +#+        */
+/*   By: mchanlia <mchanlia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 18:13:59 by mchanlia          #+#    #+#             */
-/*   Updated: 2025/10/08 19:22:57 by mchanlia         ###   ########.fr       */
+/*   Updated: 2026/07/16 05:32:24 by mchanlia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	tasks(t_thread	*philo)
 {
-	if (!check_thread_death(philo))
+	if (!check_thread_death(philo)) // check for a timer limit overflow hence death of a philo
 		return (false);
-	if (!is_eating(philo))
+	if (!is_eating(philo)) // rest is self explanatory
 		return (false);
 	if (!is_sleeping(philo))
 		return (false);
@@ -32,7 +32,7 @@ bool	philos_routine(t_thread	*philo)
 	meal_taken = 0;
 	if (philo->meal_nb > 0)
 	{
-		while (philo->meal_taken < philo->meal_nb)
+		while (philo->meal_taken < philo->meal_nb) // while meal situation not finished
 		{
 			meal_taken_mutex(philo, &meal_taken);
 			if (!tasks(philo))
@@ -41,8 +41,9 @@ bool	philos_routine(t_thread	*philo)
 	}
 	else
 	{
-		if (!tasks(philo))
+		if (!tasks(philo)) // classic solution 
 			return (false);
 	}
 	return (true);
 }
+// a bit of a clunky implementation there
